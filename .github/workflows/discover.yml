@@ -1,0 +1,22 @@
+name: discover
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalar curl_cffi (opcional)
+        run: python3 -m pip install --break-system-packages curl_cffi || true
+
+      - name: Descobrir
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        run: python3 discover.py
