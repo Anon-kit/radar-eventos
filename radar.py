@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Radar de eventos da Região Metropolitana de Belo Horizonte -> Telegram. (versão 3)
+Radar de eventos da Região Metropolitana de Belo Horizonte -> Telegram. (versão 4)
 
 - Só usa a biblioteca padrão do Python (nada para instalar).
 - O token do bot vem do Secret TELEGRAM_BOT_TOKEN do GitHub (nunca escreva o token aqui).
@@ -32,13 +32,14 @@ STATE_FILE = Path("state/seen.json")
 
 # Canal que recebe os avisos de problema, o relatório da primeira execução e o
 # "estou vivo" semanal. Por enquanto usa o canal Metal; quando criar um canal só
-# para status, troque pelo ID dele.
-STATUS_CHAT = "-1003901653814"
+# para status; hoje é o canal 'Sniffer troubleshooting'.
+STATUS_CHAT = "-1004329169711"
 
 CHANNELS = {
     "metal": {
         "id": "-1003901653814", "emoji": "🤘",
-        "palavras": ["metal", "heavy metal", "rock", "underground", "punk", "hardcore", "thrash", "hard rock"],
+        "palavras": ["metal", "heavy metal", "underground", "thrash", "hard rock"],
+        "so_titulo": ["rock", "punk", "hardcore"],
     },
     "eletronica": {
         "id": "-1003920893409", "emoji": "🎛",
@@ -46,8 +47,9 @@ CHANNELS = {
     },
     "automotivo": {
         "id": "-1004441721197", "emoji": "🏍",
-        "palavras": ["automotivo", "motociclismo", "encontro de motos", "encontro de carros", "carros",
-                     "trackday", "motoclube", "moto clube", "motocicleta", "motos"],
+        "palavras": ["automotivo", "motociclismo", "encontro de motos", "encontro de carros",
+                     "trackday", "motoclube", "moto clube", "motocicleta"],
+        "so_titulo": ["carros", "motos"],
     },
     "meliponicultura": {
         "id": "-1004468872560", "emoji": "🐝",
@@ -70,12 +72,13 @@ CHANNELS = {
     },
     "rll": {
         "id": "-1004463824122", "emoji": "🔴",
-        "palavras": ["liberal", "red light", "swing", "bdsm", "fetiche", "secreta", "rll"],
+        "palavras": ["red light", "bdsm", "fetiche", "rll"],
+        "so_titulo": ["liberal", "secreta", "swing"],
     },
     "country": {
         "id": "-1004174888002", "emoji": "🤠",
-        "palavras": ["rodeio", "agropecuaria", "peao", "cavalgada", "mangalarga", "leilao",
-                     "sertanejo", "country", "vaquejada"],
+        "palavras": ["rodeio", "agropecuaria", "peao", "cavalgada", "mangalarga", "leilao", "vaquejada"],
+        "so_titulo": ["sertanejo", "country"],
     },
 }
 
@@ -269,7 +272,8 @@ _COMP = {k: [_kw_regex(w) for w in v] for k, v in COMPANION.items()}
 
 
 def match_channels(text, title=""):
-    """Canais cujo tema aparece no texto; palavras 'so_titulo' só valem se estiverem no título."""
+    """Canais cujo tema aparece no texto. Palavras 'so_titulo' (fracas) só valem no 'title',
+    que aqui é o título + o começo da descrição (160 caracteres)."""
     t = norm(text).replace("pop rock", " ")
     tt = norm(title).replace("pop rock", " ")
     hits = []
@@ -439,6 +443,7 @@ def parse_sympla_event(page):
     ended = "o evento ja encerrou" in body or "evento encerrado" in body
     return {
         "title": title, "city": city, "official": official, "date": date, "ended": ended,
+        "head": f"{title} {meta.get('og:description', '')[:160]}",
         "text": f"{title} {meta.get('og:description', '')[:400]}",
     }
 
@@ -602,7 +607,7 @@ def run_sympla(state, report):
             ended_n += 1 if ev["ended"] else 0
             done.add(sid)
             if ev["official"] and not ev["ended"]:
-                chans = match_channels(ev["text"], ev["title"])
+                chans = match_channels(ev["text"], ev["head"])
                 if chans:
                     lines = [f"<b>{html.escape(ev['title'])}</b>", f"📍 {html.escape(ev['official'])}"]
                     if ev["date"]:
@@ -677,7 +682,7 @@ def run_alerts(state, report):
                 continue
             text = f"{e['title']} {e['text']}"
             city = find_city(text + " " + e["url"])
-            chans = match_channels(text, e["title"]) if city else []
+            chans = match_channels(text, f"{e['title']} {e['text'][:160]}") if city else []
             if chans:
                 host = urllib.parse.urlparse(e["url"]).netloc.replace("www.", "")
                 out.append({"channels": chans, "text": "\n".join([
@@ -718,7 +723,8 @@ def fetch_nenety_event(item):
         return nid, url, None
     desc = meta.get("og:description") or meta.get("description") or ""
     head = f"{title} {desc} {visible_text(body)[:500]}"
-    return nid, url, {"title": title, "desc": desc[:300], "city": find_city(head), "text": head}
+    return nid, url, {"title": title, "desc": desc[:300], "city": find_city(head), "text": head,
+                      "head": f"{title} {desc[:160]}"}
 
 
 def run_nenety(state, report):
@@ -750,7 +756,7 @@ def run_nenety(state, report):
             continue
         parsed += 1
         done.add(nid)
-        chans = match_channels(ev["text"], ev["title"]) if ev["city"] else []
+        chans = match_channels(ev["text"], ev["head"]) if ev["city"] else []
         if chans:
             out.append({"channels": chans, "text": "\n".join([
                 f"<b>{html.escape(ev['title'])}</b>", f"📍 {html.escape(ev['city'])}", html.escape(url),
