@@ -5,21 +5,21 @@
  "health": {
   "Shotgun": {
    "alerted": true,
-   "bad_runs": 5,
+   "bad_runs": 6,
    "last_error": "FetchError: shotgun.live: HTTP 429"
   },
   "Sympla": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 31973,
-   "last_ok": "2026-11-09T00:58:44+00:00"
+   "last_ok": "2026-11-09T02:10:41+00:00"
   }
  },
  "last_heartbeat": "2026-11-08T21:45:28+00:00",
  "probe_sent": true,
  "sent_week": 0,
  "sympla_fail": {},
- "sympla_lastmod": "2026-11-04T04:06+00:00",
+ "sympla_lastmod": "2026-11-04T04:05+00:00",
  "sympla_seen": [
   "1002152",
   "1005300",
