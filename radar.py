@@ -490,22 +490,41 @@ EVENT_LINK_RE = re.compile(r"/evento/([A-Za-z0-9%._\-]+)/(\d{4,9})")
 SYMPLA_URL_RE = re.compile(r"sympla\.com\.br/(?:evento/[^/?#]+/(\d{4,9})|[^/?#]+__(\d{4,9}))")
 
 
+SYMPLA_MAX_PAGES = {"belo-horizonte-mg": 30}   # páginas ?page=N lidas por cidade
+SYMPLA_DEFAULT_MAX_PAGES = 5
+
+
 def sympla_listing_ids():
-    found, ok_pages, total = {}, 0, 0
+    found, counters = {}, {"ok": 0, "total": 0}
+
+    def grab(url):
+        counters["total"] += 1
+        try:
+            status, body = http_get(url, timeout=30, retries=1)
+        except FetchError:
+            return None
+        if status != 200 or not body:
+            return None
+        counters["ok"] += 1
+        ids = {}
+        for m in EVENT_LINK_RE.finditer(body):
+            ids.setdefault(m.group(2), f"https://www.sympla.com.br/evento/{m.group(1)}/{m.group(2)}")
+        time.sleep(1)
+        return ids
+
     for slug, suffixes in SYMPLA_LISTINGS.items():
         for suf in suffixes:
-            total += 1
-            try:
-                status, body = http_get(f"https://www.sympla.com.br/eventos/{slug}{suf}", timeout=30, retries=1)
-            except FetchError:
-                continue
-            if status != 200 or not body:
-                continue
-            ok_pages += 1
-            for m in EVENT_LINK_RE.finditer(body):
-                found.setdefault(m.group(2), f"https://www.sympla.com.br/evento/{m.group(1)}/{m.group(2)}")
-            time.sleep(1)
-    return found, ok_pages, total
+            ids = grab(f"https://www.sympla.com.br/eventos/{slug}{suf}")
+            for k, v in (ids or {}).items():
+                found.setdefault(k, v)
+            if suf == "" and ids:  # a lista da cidade tem páginas: ?page=2, ?page=3...
+                for page in range(2, SYMPLA_MAX_PAGES.get(slug, SYMPLA_DEFAULT_MAX_PAGES) + 1):
+                    more = grab(f"https://www.sympla.com.br/eventos/{slug}?page={page}")
+                    new = {k: v for k, v in (more or {}).items() if k not in found}
+                    if not new:
+                        break
+                    found.update(new)
+    return found, counters["ok"], counters["total"]
 
 
 def run_sympla_lista(state, report):
@@ -518,9 +537,9 @@ def run_sympla_lista(state, report):
     new = {k: v for k, v in found.items() if k not in seen}
     state.setdefault("sympla_extra", {}).update(new)
     flags = state.setdefault("baselined", {})
-    if not flags.get("sympla_lista"):
-        flags["sympla_lista"] = True
-        report.append(f"Sympla lista: {ok_pages}/{total} páginas lidas, {len(found)} eventos vistos, "
+    if not flags.get("sympla_lista2"):
+        flags["sympla_lista2"] = True
+        report.append(f"Sympla lista (com paginação): {ok_pages}/{total} páginas lidas, {len(found)} eventos vistos, "
                       f"{len(new)} ainda desconhecidos (serão checados agora).")
     return [], len(found)
 
