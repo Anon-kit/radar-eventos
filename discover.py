@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Diagnóstico profundo, parte 2 (roda só quando você manda; não altera nada).
+Diagnóstico profundo, parte 3 (roda só quando você manda; não altera nada).
 Procura, visto de dentro do GitHub, de onde cada plataforma tira a lista de eventos.
 Manda o resultado para o canal de status.
 """
@@ -142,87 +142,118 @@ def next_info(page):
     return [f"  NEXT: buildId={nd.get('buildId')} page={nd.get('page')} pageProps={list(pp.keys())[:12]}"]
 
 
-def section_sympla():
+def ctx(text, needle, width=350):
+    i = text.find(needle)
+    if i == -1:
+        return None
+    return re.sub(r"\s+", " ", text[max(0, i - width // 3):i + width])
+
+
+def chunks_of(page, base, max_chunks=45):
+    srcs = []
+    for s in re.findall(r'<script[^>]+src=["\']([^"\']+)["\']', page):
+        u = urllib.parse.urljoin(base, html.unescape(s))
+        if u not in srcs and not any(n in urllib.parse.urlparse(u).netloc for n in NOISE):
+            srcs.append(u)
+    for u in srcs[:max_chunks]:
+        c, js = get(u, timeout=30)
+        if c == 200:
+            yield u, js
+
+
+def section_sympla_api():
     url = "https://www.sympla.com.br/eventos/belo-horizonte-mg"
     st, page = get(url)
-    lines = [f"🎟 Sympla BH: HTTP {st}, {len(page) // 1024} KB"]
+    lines = [f"🎟 Sympla (parte 3): HTTP {st}, {len(page) // 1024} KB"]
     if st != 200:
         return "\n".join(lines)
-    lines.append(f"links /evento/ no HTML: {len(re.findall(r'/evento/', page))} | ids __N: "
-                 f"{len(re.findall(r'__[0-9]{5,}', page))} | next_f: {'self.__next_f' in page} | "
-                 f"window.__: {sorted(set(re.findall(r'window[.](__[A-Za-z_]+__)', page)))[:5]}")
-    scripts = re.findall(r"<script([^>]*)>(.*?)</script>", page, re.S | re.I)
-    big = sorted(((len(b), a.strip()[:60], b) for a, b in scripts if len(b) > 3000), reverse=True)[:5]
-    for n, attrs, body in big:
-        keys = {k: body.count(k) for k in ('"startDate"', '"slug"', '"eventId"', '"name"', '"venue"', '"city"',
-                                            '"events"', '"title"') if k in body}
-        lines.append(f"  script inline {n // 1024} KB [{attrs}] chaves: {keys}")
-    done = False
-    for n, attrs, body in big:
-        for k in ('"startDate"', '"events"', '"slug"'):
-            i = body.find(k)
-            if i != -1:
-                lines.append("  trecho: " + re.sub(r"\s+", " ", body[max(0, i - 150):i + 350]))
-                done = True
-                break
-        if done:
+    scripts = re.findall(r"<script[^>]*>(.*?)</script>", page, re.S | re.I)
+    for body in sorted(scripts, key=len, reverse=True)[:3]:
+        c = ctx(body, "/evento/", 700)
+        if c:
+            lines.append("trecho dos dados da lista: " + c)
             break
-    n, scanned, eps = scan_js(page, url)
-    lines.append(f"scripts: {n} (lidos {scanned}); endereços de dados: {len(eps)}")
-    lines += [f"  {e}" for e in eps]
+    need = ["/v4/search/query", "/v4/search", "api.sympla.com.br"]
+    got = {}
+    for u, js in chunks_of(page, url):
+        for n in need:
+            if n not in got and n in js:
+                got[n] = (u.rsplit("/", 1)[-1][:30], ctx(js, n, 500))
+        if len(got) == len(need):
+            break
+    for n, (src, c) in got.items():
+        lines.append(f"[{n}] em {src}: {c}")
     return "\n".join(lines)
 
 
-def section_platform(name, base, start="/"):
-    st, page = get(base + start)
+def section_central():
+    base = "https://www.centraldoseventos.com.br/"
+    st, page = get(base)
+    lines = [f"🌐 Central dos Eventos: HTTP {st}"]
     if st != 200:
-        return f"🌐 {name}: HTTP {st}"
-    total, evt = paths_of(page, base + start)
-    lines = [f"🌐 {name}: {len(page) // 1024} KB | {title_of(page)} | links internos {total}",
-             "  caminhos: " + " ".join(evt)]
-    lines += next_info(page)
-    lines += ["  " + s for s in sitemap_info(base)]
-    n, scanned, eps = scan_js(page, base + start, max_chunks=25)
-    lines.append(f"  scripts {n} (lidos {scanned}); endereços de dados: {len(eps)}")
-    lines += [f"    {e}" for e in eps[:20]]
+        return "\n".join(lines)
+    hosts, shown = set(), 0
+    for u, js in chunks_of(page, base, 6):
+        hosts |= set(re.findall(r"https?://[A-Za-z0-9.\-]*(?:central|eventos|api)[A-Za-z0-9.\-]*\.[a-z]{2,}", js))
+        for n in ("/v1/public/event/filter", "/v1/public/event/main-events", "/v1/public/event/home-info"):
+            c = ctx(js, n, 600)
+            if c and shown < 3:
+                lines.append(f"[{n}] {c}")
+                shown += 1
+    lines.append("hosts vistos: " + " ".join(sorted(h for h in hosts if not any(x in h for x in NOISE))[:12]))
     return "\n".join(lines)
 
 
-def section_nenety():
-    base = "https://www.nenety.com.br"
-    st, page = get(base + "/")
-    if st != 200:
-        return f"🌐 Nenety: HTTP {st}"
-    paths = []
-    for h in re.findall(r'href="(/[^"#?]+__[0-9]+)"', page):
-        if h not in paths:
-            paths.append(h)
-    lines = [f"🌐 Nenety: {len(page) // 1024} KB, eventos na home: {len(paths)}", "  " + " ".join(paths[:15])]
-    for p in paths[:2]:
-        s2, ev = get(base + p)
-        meta = {}
-        for m in re.finditer(r'<meta\s+(?:name|property)="([^"]+)"\s+content="([^"]*)"', ev):
-            meta.setdefault(m.group(1), html.unescape(m.group(2)))
-        lines.append(f"  {p}: HTTP {s2} | título: {title_of(ev)} | og:desc: {meta.get('og:description', '-')[:140]}"
-                     f" | ld+json: {'ld+json' in ev}")
-        lines.append("    texto: " + visible(ev)[:600])
-    lines += ["  " + s for s in sitemap_info(base)]
+def find_events(obj, path="", depth=0, out=None):
+    out = [] if out is None else out
+    if depth > 9 or len(out) >= 3:
+        return out
+    if isinstance(obj, dict):
+        ks = set(obj)
+        if ({"name", "title"} & ks) and any("date" in k.lower() or "start" in k.lower() for k in ks):
+            out.append((path, {k: str(v)[:60] for k, v in list(obj.items())[:14]}))
+        for k, v in obj.items():
+            find_events(v, f"{path}.{k}", depth + 1, out)
+    elif isinstance(obj, list):
+        for i, v in enumerate(obj[:30]):
+            find_events(v, f"{path}[{i}]", depth + 1, out)
+    return out
+
+
+def section_lets():
+    st, page = get("https://lets.events/")
+    lines = [f"🌐 Lets: HTTP {st}"]
+    m = re.search(r'<script id="__NEXT_DATA__"[^>]*>(.*?)</script>', page, re.S)
+    if not m:
+        return "\n".join(lines + ["sem NEXT_DATA"])
+    nd = json.loads(m.group(1))
+    pp = (nd.get("props") or {}).get("pageProps") or {}
+    ap = pp.get("apolloData")
+    lines.append(f"apolloData: {type(ap).__name__}, tamanho {len(json.dumps(ap)) // 1024} KB; "
+                 f"chaves: {list(ap.keys())[:10] if isinstance(ap, dict) else '-'}")
+    lines.append(f"host={pp.get('host')} path={pp.get('path')} appConfig={str(pp.get('appConfig'))[:200]}")
+    for path, sample in find_events(ap):
+        lines.append(f"  objeto-evento em {path}: {json.dumps(sample, ensure_ascii=False)[:420]}")
+    return "\n".join(lines)
+
+
+def section_peek():
+    lines = ["👀 Espiadas em endereços públicos"]
+    for url in ("https://www.baladapp.com.br/api/v3/anuncios", "https://www.baladapp.com.br/api/v3/banners",
+                "https://www.q2ingressos.com.br/api/eventgroup"):
+        st, body = get(url, timeout=25)
+        snip = re.sub(r"\s+", " ", body)[:320]
+        lines.append(f"• {url.split('//')[1]}: HTTP {st} ({len(body)} bytes) {snip}")
     return "\n".join(lines)
 
 
 def main():
-    jobs = [section_sympla,
-            lambda: section_platform("Lets", "https://lets.events"),
-            section_nenety,
-            lambda: section_platform("BaladAPP", "https://www.baladapp.com.br", "/pt-BR"),
-            lambda: section_platform("Central dos Eventos", "https://www.centraldoseventos.com.br"),
-            lambda: section_platform("Q2 Ingressos", "https://www.q2ingressos.com.br")]
-    for job in jobs:
+    for job in (section_sympla_api, section_central, section_lets, section_peek):
         try:
             say(job())
         except Exception as e:
             say(f"erro numa seção: {type(e).__name__}: {e}")
-    say("✅ Descoberta 2 terminou.")
+    say("✅ Descoberta 3 terminou.")
 
 
 if __name__ == "__main__":
