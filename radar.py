@@ -8,6 +8,7 @@ Radar de eventos da Região Metropolitana de Belo Horizonte -> Telegram.
 - Roda no GitHub Actions a cada ~15 min e guarda o que já viu em state/seen.json.
 """
 import gzip
+import hashlib
 import html
 import json
 import os
@@ -18,6 +19,7 @@ import unicodedata
 import urllib.error
 import urllib.parse
 import urllib.request
+import xml.etree.ElementTree as ET
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 from pathlib import Path
@@ -107,6 +109,21 @@ SYMPLA_MIN_IDS = 200
 
 BAD_RUNS_ALERT = 3            # avisa depois de 3 execuções seguidas com problema
 MAX_SEND_PER_RUN = 60
+
+# Fontes ligadas/desligadas. O Shotgun fica desligado: bloqueia os servidores do GitHub (HTTP 429).
+ENABLED = {"Shotgun": False}
+
+# Páginas de lista da Sympla lidas a cada rodada (cidade -> sufixos). Só ler a de BH inteira,
+# as outras cidades só o básico, para não sobrecarregar o site.
+SYMPLA_LISTINGS = {
+    "belo-horizonte-mg": ["", "/hoje", "/amanha", "/este-fim-de-semana", "/esta-semana", "/proxima-semana", "/este-mes"],
+    "contagem-mg": ["", "/este-mes"], "betim-mg": ["", "/este-mes"], "nova-lima-mg": ["", "/este-mes"],
+    "sabara-mg": [""], "santa-luzia-mg": [""], "lagoa-santa-mg": [""], "ribeirao-das-neves-mg": [""],
+    "vespasiano-mg": [""], "ibirite-mg": [""], "pedro-leopoldo-mg": [""], "brumadinho-mg": [""],
+}
+SYMPLA_STALE_DAYS = 21        # sitemap da Sympla parado há mais que isso = aviso
+NENETY_BASE = "https://www.nenety.com.br"
+NENETY_MAX_PAGES_PER_RUN = 40
 PROBES = {
     "Sympla": "https://www.sympla.com.br",
     "Shotgun": "https://shotgun.live",
@@ -222,6 +239,18 @@ def run_url():
 
 # ------------------------- filtro por tema e região -------------------------
 _RMBH_NORM = {norm(c): c for c in RMBH}
+
+
+_CITY_RX = re.compile(r"(?<![a-z0-9])(" + "|".join(
+    re.escape(k) for k in sorted(list(_RMBH_NORM) + ["bh"], key=len, reverse=True)) + r")(?![a-z0-9])")
+
+
+def find_city(text):
+    """Primeira cidade da RMBH citada no texto (ou None). 'BH' vira Belo Horizonte."""
+    m = _CITY_RX.search(norm(text))
+    if not m:
+        return None
+    return "Belo Horizonte" if m.group(1) == "bh" else _RMBH_NORM[m.group(1)]
 
 
 def rmbh_city(name):
@@ -442,44 +471,98 @@ def sympla_lastmod():
         return None
 
 
-def run_sympla(state, report):
-    ids = sympla_ids()
+def check_sitemap_age(state):
     lastmod = sympla_lastmod()
-    if lastmod:
-        age = (datetime.now(timezone.utc) - lastmod).total_seconds() / 86400
-        if age > 3 and not state.get("sympla_stale"):
-            state["sympla_stale"] = True
-            notify_status(f"⚠️ Radar: o sitemap da Sympla não é atualizado há {age:.0f} dias. "
-                          "Os avisos da Sympla vão atrasar até voltar. O Shotgun continua normal.")
-        elif age <= 3 and state.get("sympla_stale"):
-            state["sympla_stale"] = False
-            notify_status("✅ Radar: o sitemap da Sympla voltou a ser atualizado.")
-        state["sympla_lastmod"] = lastmod.isoformat(timespec="minutes")
-    last = state.get("health", {}).get("sympla", {}).get("last_count") or 0
-    if len(ids) < SYMPLA_MIN_IDS or (last and len(ids) < 0.3 * last):
-        raise RuntimeError(f"sitemap com {len(ids)} eventos (antes {last})")
+    if not lastmod:
+        return
+    age = (datetime.now(timezone.utc) - lastmod).total_seconds() / 86400
+    state["sympla_lastmod"] = lastmod.isoformat(timespec="minutes")
+    if age > SYMPLA_STALE_DAYS and not state.get("sympla_stale2"):
+        state["sympla_stale2"] = True
+        notify_status(f"⚠️ Radar: o sitemap da Sympla não é atualizado há {age:.0f} dias (normal é ~2 semanas). "
+                      "As listas e os alertas do Google continuam cobrindo.")
+    elif age <= SYMPLA_STALE_DAYS and state.get("sympla_stale2"):
+        state["sympla_stale2"] = False
+        notify_status("✅ Radar: o sitemap da Sympla voltou a ser atualizado.")
+
+
+EVENT_LINK_RE = re.compile(r"/evento/([A-Za-z0-9%._\-]+)/(\d{4,9})")
+SYMPLA_URL_RE = re.compile(r"sympla\.com\.br/(?:evento/[^/?#]+/(\d{4,9})|[^/?#]+__(\d{4,9}))")
+
+
+def sympla_listing_ids():
+    found, ok_pages, total = {}, 0, 0
+    for slug, suffixes in SYMPLA_LISTINGS.items():
+        for suf in suffixes:
+            total += 1
+            try:
+                status, body = http_get(f"https://www.sympla.com.br/eventos/{slug}{suf}", timeout=30, retries=1)
+            except FetchError:
+                continue
+            if status != 200 or not body:
+                continue
+            ok_pages += 1
+            for m in EVENT_LINK_RE.finditer(body):
+                found.setdefault(m.group(2), f"https://www.sympla.com.br/evento/{m.group(1)}/{m.group(2)}")
+            time.sleep(1)
+    return found, ok_pages, total
+
+
+def run_sympla_lista(state, report):
+    found, ok_pages, total = sympla_listing_ids()
+    if ok_pages == 0:
+        raise RuntimeError(f"nenhuma das {total} páginas de lista respondeu")
+    if not found:
+        raise RuntimeError(f"{ok_pages} páginas lidas, mas nenhum link de evento achado (layout mudou?)")
     seen = set(state.get("sympla_seen", []))
-    baselined = state.setdefault("baselined", {}).get("sympla", False)
-    out = []
-    if not baselined:
+    new = {k: v for k, v in found.items() if k not in seen}
+    state.setdefault("sympla_extra", {}).update(new)
+    flags = state.setdefault("baselined", {})
+    if not flags.get("sympla_lista"):
+        flags["sympla_lista"] = True
+        report.append(f"Sympla lista: {ok_pages}/{total} páginas lidas, {len(found)} eventos vistos, "
+                      f"{len(new)} ainda desconhecidos (serão checados agora).")
+    return [], len(found)
+
+
+def run_sympla(state, report):
+    flags = state.setdefault("baselined", {})
+    ids, sitemap_err = {}, None
+    try:
+        ids = sympla_ids()
+        last = state.get("health", {}).get("Sympla", {}).get("last_count") or 0
+        if len(ids) < SYMPLA_MIN_IDS or (last and len(ids) < 0.3 * last):
+            raise RuntimeError(f"sitemap com {len(ids)} eventos (antes {last})")
+        check_sitemap_age(state)
+    except Exception as e:
+        ids, sitemap_err = {}, e
+    if not flags.get("sympla"):
+        if sitemap_err:
+            raise sitemap_err
         ordered = sorted(ids, key=int)
         step = max(1, len(ordered) // 8)
-        sample_ids = ordered[::step][:8]
         with ThreadPoolExecutor(6) as pool:
-            res = list(pool.map(fetch_sympla_event, [(i, ids[i]) for i in sample_ids]))
-        okc = sum(1 for r in res if r[2])
+            res = list(pool.map(fetch_sympla_event, [(i, ids[i]) for i in ordered[::step][:8]]))
         desc = "; ".join(f"{r[2]['title'][:40]} | {r[2]['city'] or 'sem cidade'} | {r[2]['date'] or '?'}"
                          for r in res if r[2])
         report.append(f"Sympla: {len(ids)} eventos no sitemap (atualizado em {state.get('sympla_lastmod', '?')}); "
-                      f"{okc}/{len(res)} páginas de teste lidas. Amostra espalhada pelo sitemap: {desc}")
-        state["baselined"]["sympla"] = True
-        state["sympla_seen"] = sorted(ids)
-        return out, len(ids)
-    todo = sorted((i for i in ids if i not in seen), key=int, reverse=True)[:SYMPLA_MAX_PAGES_PER_RUN]
+                      f"{sum(1 for r in res if r[2])}/{len(res)} páginas de teste lidas. Amostra: {desc}")
+        flags["sympla"] = True
+        state["sympla_seen"] = sorted(ids, key=int)
+        return [], len(ids)
+    if sitemap_err:
+        health_bad(state, "Sympla (sitemap)", f"{type(sitemap_err).__name__}: {sitemap_err}")
+    else:
+        health_ok(state, "Sympla (sitemap)", len(ids))
+    seen = set(state.get("sympla_seen", []))
+    extra = state.get("sympla_extra", {})
+    cands = dict(ids)
+    cands.update(extra)
+    todo = sorted((i for i in cands if i not in seen), key=int, reverse=True)[:SYMPLA_MAX_PAGES_PER_RUN]
     fails = state.setdefault("sympla_fail", {})
-    done, parsed_ok, ended_n = set(), 0, 0
+    out, done, parsed_ok, ended_n = [], set(), 0, 0
     with ThreadPoolExecutor(6) as pool:
-        results = list(pool.map(fetch_sympla_event, [(i, ids[i]) for i in todo]))
+        results = list(pool.map(fetch_sympla_event, [(i, cands[i]) for i in todo]))
     for sid, url, ev, st in results:
         if st == "gone":
             done.add(sid)
@@ -505,9 +588,148 @@ def run_sympla(state, report):
         raise RuntimeError("todas as páginas lidas parecem 'encerradas' (detecção suspeita)")
     for sid in done:
         fails.pop(sid, None)
-    state["sympla_fail"] = {k: v for k, v in fails.items() if k in ids}
-    state["sympla_seen"] = sorted((seen & set(ids)) | done)
-    return out, len(ids)
+    state["sympla_fail"] = {k: v for k, v in fails.items() if k not in done}
+    state["sympla_extra"] = {k: v for k, v in extra.items() if k not in done and k not in seen}
+    state["sympla_seen"] = sorted(seen | done, key=int)[-200000:]
+    return out, len(ids) or state.get("health", {}).get("Sympla", {}).get("last_count", 0)
+
+
+# ---------------------------- Alertas do Google (RSS) ---------------------------
+ATOM = "{http://www.w3.org/2005/Atom}"
+
+
+def parse_feed(xml_text):
+    root = ET.fromstring(xml_text)
+    out = []
+    for e in root.iter(ATOM + "entry"):
+        link = e.find(ATOM + "link")
+        href = link.get("href", "") if link is not None else ""
+        q = urllib.parse.parse_qs(urllib.parse.urlparse(href).query)
+        real = q["url"][0] if q.get("url") else href
+        out.append({"id": (e.findtext(ATOM + "id") or real).strip(),
+                    "title": clean_text(e.findtext(ATOM + "title") or ""),
+                    "text": clean_text(e.findtext(ATOM + "content") or ""), "url": real})
+    return out
+
+
+def run_alerts(state, report):
+    feeds = [u for u in re.split(r"\s+", os.environ.get("ALERT_FEEDS", "").strip()) if u.startswith("http")]
+    if not feeds:
+        return [], None  # não configurado: fica quieto
+    init, seen = set(state.get("feed_init", [])), set(state.get("alerts_seen", []))
+    out, total, bad = [], 0, 0
+    for url in feeds:
+        key = hashlib.sha1(url.encode()).hexdigest()[:8]
+        try:
+            _, body = http_get(url, timeout=30, retries=1)
+            entries = parse_feed(body)
+        except Exception as e:
+            bad += 1
+            print(f"feed {key}: {type(e).__name__}")
+            continue
+        total += len(entries)
+        if key not in init:
+            init.add(key)
+            seen |= {e["id"] for e in entries}
+            amostra = "; ".join(f"{e['title'][:50]} -> {urllib.parse.urlparse(e['url']).netloc}" for e in entries[:2])
+            report.append(f"Alertas: feed {key} ligado com {len(entries)} itens (sem avisos nesta 1a leitura). Amostra: {amostra}")
+            continue
+        for e in entries:
+            if e["id"] in seen:
+                continue
+            seen.add(e["id"])
+            m = SYMPLA_URL_RE.search(e["url"])
+            if m:  # Sympla: deixa o leitor da Sympla abrir a página e conferir cidade/data
+                sid = m.group(1) or m.group(2)
+                state.setdefault("sympla_extra", {})[sid] = e["url"]
+                continue
+            text = f"{e['title']} {e['text']}"
+            city = find_city(text + " " + e["url"])
+            chans = match_channels(text) if city else []
+            if chans:
+                host = urllib.parse.urlparse(e["url"]).netloc.replace("www.", "")
+                out.append({"channels": chans, "text": "\n".join([
+                    f"<b>{html.escape(e['title'])}</b>", f"📍 {html.escape(city)}", html.escape(e["url"]),
+                    f"<i>via Google Alertas ({html.escape(host)})</i>"])})
+    if bad == len(feeds):
+        raise RuntimeError(f"nenhum dos {len(feeds)} feeds respondeu")
+    state["feed_init"] = sorted(init)
+    state["alerts_seen"] = sorted(seen)[-20000:]
+    return out, total
+
+
+# ------------------------------------ Nenety ------------------------------------
+def nenety_links():
+    _, page = http_get(NENETY_BASE + "/", timeout=30)
+    links = {}
+    for h in re.findall(r"""href=["']([^"'#?]+)["']""", page):
+        u = urllib.parse.urljoin(NENETY_BASE + "/", html.unescape(h))
+        pr = urllib.parse.urlparse(u)
+        m = re.search(r"/([A-Za-z0-9%._\-]+__(\d+))/?$", pr.path)
+        if m and pr.netloc.endswith("nenety.com.br"):
+            links.setdefault(m.group(2), u)
+    return links
+
+
+def fetch_nenety_event(item):
+    nid, url = item
+    try:
+        status, body = http_get(url, timeout=25, retries=1)
+    except FetchError:
+        return nid, url, None
+    if status != 200 or not body:
+        return nid, url, None
+    meta = meta_map(body)
+    tm = TITLE_RE.search(body)
+    title = (meta.get("og:title") or (clean_text(tm.group(1)) if tm else "")).strip()
+    if not title:
+        return nid, url, None
+    desc = meta.get("og:description") or meta.get("description") or ""
+    head = f"{title} {desc} {visible_text(body)[:500]}"
+    return nid, url, {"title": title, "desc": desc[:300], "city": find_city(head), "text": head}
+
+
+def run_nenety(state, report):
+    links = nenety_links()
+    if not links:
+        raise RuntimeError("nenhum evento encontrado na home da Nenety")
+    seen = set(state.get("nenety_seen", []))
+    flags = state.setdefault("baselined", {})
+    out = []
+    if not flags.get("nenety"):
+        with ThreadPoolExecutor(4) as pool:
+            res = list(pool.map(fetch_nenety_event, list(links.items())[:2]))
+        amostra = "; ".join(f"{r[2]['title'][:50]} | cidade: {r[2]['city'] or '?'} | {r[2]['desc'][:80]}"
+                            for r in res if r[2])
+        report.append(f"Nenety: {len(links)} eventos na home. Amostra: {amostra or 'não consegui ler as páginas'}")
+        flags["nenety"] = True
+        state["nenety_seen"] = sorted(set(links) | seen, key=int)
+        return out, len(links)
+    todo = [(i, u) for i, u in links.items() if i not in seen][:NENETY_MAX_PAGES_PER_RUN]
+    done, parsed = set(), 0
+    with ThreadPoolExecutor(4) as pool:
+        results = list(pool.map(fetch_nenety_event, todo))
+    fails = state.setdefault("nenety_fail", {})
+    for nid, url, ev in results:
+        if ev is None:
+            fails[nid] = fails.get(nid, 0) + 1
+            if fails[nid] >= 3:
+                done.add(nid)
+            continue
+        parsed += 1
+        done.add(nid)
+        chans = match_channels(ev["text"]) if ev["city"] else []
+        if chans:
+            out.append({"channels": chans, "text": "\n".join([
+                f"<b>{html.escape(ev['title'])}</b>", f"📍 {html.escape(ev['city'])}", html.escape(url),
+                "<i>via Nenety</i>"])})
+    if len(todo) >= 5 and parsed == 0:
+        raise RuntimeError(f"{len(todo)} páginas abertas e nenhuma foi entendida")
+    for nid in done:
+        fails.pop(nid, None)
+    state["nenety_fail"] = {k: v for k, v in fails.items() if k not in done}
+    state["nenety_seen"] = sorted(seen | done, key=int)[-20000:]
+    return out, len(links)
 
 
 # ----------------------------- saúde / diagnóstico ----------------------------
@@ -587,12 +809,18 @@ def main():
     state = load_state()
     first = not state.get("probe_sent")
     report, events, ok_sources = [], [], 0
-    for name, fn in (("Shotgun", run_shotgun), ("Sympla", run_sympla)):
+    sources = (("Alertas", run_alerts), ("Nenety", run_nenety), ("Sympla lista", run_sympla_lista),
+               ("Sympla", run_sympla), ("Shotgun", run_shotgun))
+    for name, fn in sources:
+        if not ENABLED.get(name, True):
+            state.get("health", {}).pop(name, None)
+            continue
         try:
             evs, count = fn(state, report)
             events += evs
-            health_ok(state, name, count)
-            ok_sources += 1
+            if count is not None:
+                health_ok(state, name, count)
+                ok_sources += 1
         except Exception as e:
             health_bad(state, name, f"{type(e).__name__}: {e}")
             if first or FORCE_PROBE:
@@ -608,7 +836,7 @@ def main():
     state["sent_week"] = state.get("sent_week", 0) + sent
     need_probe = first or FORCE_PROBE
     if report:
-        notify_status("🚀 <b>Radar ligado</b>\n" + "\n".join(html.escape(r) for r in report))
+        notify_status("🆕 <b>Radar: relatório das fontes</b>\n" + "\n".join(html.escape(r) for r in report))
     if need_probe:
         notify_status(probe())
     state["probe_sent"] = True
