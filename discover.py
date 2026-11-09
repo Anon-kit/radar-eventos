@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Diagnóstico profundo, parte 3 (roda só quando você manda; não altera nada).
+Diagnóstico profundo, parte 4 (roda só quando você manda; não altera nada).
 Procura, visto de dentro do GitHub, de onde cada plataforma tira a lista de eventos.
 Manda o resultado para o canal de status.
 """
@@ -33,17 +33,26 @@ API_PATTERNS = [
 ]
 
 
-def get(url, timeout=25):
+def get(url, timeout=25, post=None):
+    headers = {"User-Agent": UA, "Accept-Language": "pt-BR,pt;q=0.9", "Accept-Encoding": "gzip",
+               "Accept": "application/json, text/html;q=0.8, */*;q=0.5"}
+    data = None
+    if post is not None:
+        data = json.dumps(post).encode()
+        headers["Content-Type"] = "application/json"
     try:
-        req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept-Language": "pt-BR,pt;q=0.9",
-                                                   "Accept-Encoding": "gzip"})
+        req = urllib.request.Request(url, data=data, headers=headers)
         with urllib.request.urlopen(req, timeout=timeout) as r:
-            data = r.read()
+            raw = r.read()
             if (r.headers.get("Content-Encoding") or "").lower() == "gzip":
-                data = gzip.decompress(data)
-            return r.status, data.decode(r.headers.get_content_charset() or "utf-8", errors="replace")
+                raw = gzip.decompress(raw)
+            return r.status, raw.decode(r.headers.get_content_charset() or "utf-8", errors="replace")
     except urllib.error.HTTPError as e:
-        return e.code, ""
+        try:
+            body = e.read().decode("utf-8", "replace")
+        except Exception:
+            body = ""
+        return e.code, body
     except Exception as e:
         return 0, f"ERR {type(e).__name__}"
 
@@ -142,11 +151,29 @@ def next_info(page):
     return [f"  NEXT: buildId={nd.get('buildId')} page={nd.get('page')} pageProps={list(pp.keys())[:12]}"]
 
 
+def snip(text, n=240):
+    return re.sub(r"\s+", " ", text)[:n]
+
+
+def ids_in(page):
+    return {m.group(2) for m in re.finditer(r"/evento/([A-Za-z0-9%._\-]+)/(\d{4,9})", page)}
+
+
+def jshape(txt):
+    try:
+        d = json.loads(txt)
+    except Exception:
+        return "não é JSON"
+    if isinstance(d, dict):
+        return f"objeto, chaves: {list(d.keys())[:12]}"
+    if isinstance(d, list):
+        return f"lista de {len(d)}; 1º item: {json.dumps(d[0], ensure_ascii=False)[:300] if d else '-'}"
+    return type(d).__name__
+
+
 def ctx(text, needle, width=350):
     i = text.find(needle)
-    if i == -1:
-        return None
-    return re.sub(r"\s+", " ", text[max(0, i - width // 3):i + width])
+    return None if i == -1 else re.sub(r"\s+", " ", text[max(0, i - width // 3):i + width])
 
 
 def chunks_of(page, base, max_chunks=45):
@@ -161,99 +188,78 @@ def chunks_of(page, base, max_chunks=45):
             yield u, js
 
 
-def section_sympla_api():
-    url = "https://www.sympla.com.br/eventos/belo-horizonte-mg"
-    st, page = get(url)
-    lines = [f"🎟 Sympla (parte 3): HTTP {st}, {len(page) // 1024} KB"]
-    if st != 200:
-        return "\n".join(lines)
-    scripts = re.findall(r"<script[^>]*>(.*?)</script>", page, re.S | re.I)
-    for body in sorted(scripts, key=len, reverse=True)[:3]:
-        c = ctx(body, "/evento/", 700)
+def section_sympla_pages():
+    base = "https://www.sympla.com.br/eventos/belo-horizonte-mg"
+    st, p1 = get(base)
+    a = ids_in(p1)
+    lines = [f"📄 Sympla BH, teste de páginas: lista base HTTP {st}, {len(a)} eventos"]
+    for suffix in ("?page=2", "?page=3", "?pagina=2", "/show-musica-festa", "?c=show-musica-festa"):
+        s, pg = get(base + suffix)
+        b = ids_in(pg)
+        lines.append(f"  {suffix}: HTTP {s}, {len(b)} eventos, novos em relação à base: {len(b - a)}")
+    return "\n".join(lines)
+
+
+def section_sympla_search():
+    lines = ["🔎 Sympla: busca interna"]
+    for u in ("https://api.sympla.com.br/v4/search/query?limit=3&page=0&type=normal&sort=DAY_TRENDING_SCORE",
+              "https://www.sympla.com.br/api/v4/search/query?limit=3&page=0&type=normal",
+              "https://www.sympla.com.br/api/discovery/v4/search/query?limit=3&page=0&type=normal",
+              "https://www.sympla.com.br/api/v1/search?limit=3",
+              "https://www.sympla.com.br/api/v4/search?limit=3&page=0"):
+        st, body = get(u)
+        lines.append(f"• {u.split('//')[1][:90]}: HTTP {st} {snip(body, 200)}")
+    page = get("https://www.sympla.com.br/eventos/belo-horizonte-mg")[1]
+    for key in ("queryKey", "searchParams", "initialParams", "dehydratedState"):
+        c = ctx(page, key, 500)
         if c:
-            lines.append("trecho dos dados da lista: " + c)
+            lines.append(f"[{key} na página] {c}")
             break
-    need = ["/v4/search/query", "/v4/search", "api.sympla.com.br"]
-    got = {}
-    for u, js in chunks_of(page, url):
-        for n in need:
-            if n not in got and n in js:
-                got[n] = (u.rsplit("/", 1)[-1][:30], ctx(js, n, 500))
-        if len(got) == len(need):
-            break
-    for n, (src, c) in got.items():
-        lines.append(f"[{n}] em {src}: {c}")
-    return "\n".join(lines)
-
-
-def section_central():
-    base = "https://www.centraldoseventos.com.br/"
-    st, page = get(base)
-    lines = [f"🌐 Central dos Eventos: HTTP {st}"]
-    if st != 200:
-        return "\n".join(lines)
-    hosts, shown = set(), 0
-    for u, js in chunks_of(page, base, 6):
-        hosts |= set(re.findall(r"https?://[A-Za-z0-9.\-]*(?:central|eventos|api)[A-Za-z0-9.\-]*\.[a-z]{2,}", js))
-        for n in ("/v1/public/event/filter", "/v1/public/event/main-events", "/v1/public/event/home-info"):
-            c = ctx(js, n, 600)
-            if c and shown < 3:
-                lines.append(f"[{n}] {c}")
+    shown = 0
+    for u, js in chunks_of(page, "https://www.sympla.com.br/", 45):
+        for m in re.finditer(r"service", js):
+            seg = js[m.start():m.start() + 900]
+            if "fetch(" in seg or "URLSearchParams" in seg or "axios" in seg:
+                lines.append(f"[código em {u.rsplit('/', 1)[-1][:24]}] " + snip(js[max(0, m.start() - 200):m.start() + 600], 800))
                 shown += 1
-    lines.append("hosts vistos: " + " ".join(sorted(h for h in hosts if not any(x in h for x in NOISE))[:12]))
+                break
+        if shown >= 3:
+            break
     return "\n".join(lines)
 
 
-def find_events(obj, path="", depth=0, out=None):
-    out = [] if out is None else out
-    if depth > 9 or len(out) >= 3:
-        return out
-    if isinstance(obj, dict):
-        ks = set(obj)
-        if ({"name", "title"} & ks) and any("date" in k.lower() or "start" in k.lower() for k in ks):
-            out.append((path, {k: str(v)[:60] for k, v in list(obj.items())[:14]}))
-        for k, v in obj.items():
-            find_events(v, f"{path}.{k}", depth + 1, out)
-    elif isinstance(obj, list):
-        for i, v in enumerate(obj[:30]):
-            find_events(v, f"{path}[{i}]", depth + 1, out)
-    return out
+def section_central_api():
+    base = "https://api.centraldoseventos.com.br"
+    lines = ["🌐 Central dos Eventos: API"]
+    for path in ("/v1/public/event/main-events", "/v1/public/event/home-info", "/v3/public/address/cities"):
+        st, body = get(base + path)
+        lines.append(f"• GET {path}: HTTP {st} ({len(body)} bytes) {jshape(body)} | {snip(body, 200)}")
+    for payload in ({}, {"city": "Belo Horizonte"}):
+        st, body = get(base + "/v1/public/event/filter", post=payload)
+        lines.append(f"• POST filter {json.dumps(payload)}: HTTP {st} ({len(body)} bytes) {jshape(body)} | {snip(body, 200)}")
+    return "\n".join(lines)
 
 
-def section_lets():
+def section_lets_cfg():
     st, page = get("https://lets.events/")
-    lines = [f"🌐 Lets: HTTP {st}"]
     m = re.search(r'<script id="__NEXT_DATA__"[^>]*>(.*?)</script>', page, re.S)
     if not m:
-        return "\n".join(lines + ["sem NEXT_DATA"])
-    nd = json.loads(m.group(1))
-    pp = (nd.get("props") or {}).get("pageProps") or {}
-    ap = pp.get("apolloData")
-    lines.append(f"apolloData: {type(ap).__name__}, tamanho {len(json.dumps(ap)) // 1024} KB; "
-                 f"chaves: {list(ap.keys())[:10] if isinstance(ap, dict) else '-'}")
-    lines.append(f"host={pp.get('host')} path={pp.get('path')} appConfig={str(pp.get('appConfig'))[:200]}")
-    for path, sample in find_events(ap):
-        lines.append(f"  objeto-evento em {path}: {json.dumps(sample, ensure_ascii=False)[:420]}")
-    return "\n".join(lines)
-
-
-def section_peek():
-    lines = ["👀 Espiadas em endereços públicos"]
-    for url in ("https://www.baladapp.com.br/api/v3/anuncios", "https://www.baladapp.com.br/api/v3/banners",
-                "https://www.q2ingressos.com.br/api/eventgroup"):
-        st, body = get(url, timeout=25)
-        snip = re.sub(r"\s+", " ", body)[:320]
-        lines.append(f"• {url.split('//')[1]}: HTTP {st} ({len(body)} bytes) {snip}")
-    return "\n".join(lines)
+        return f"🌐 Lets: sem NEXT_DATA (HTTP {st})"
+    pp = (json.loads(m.group(1)).get("props") or {}).get("pageProps") or {}
+    cfg = pp.get("appConfig") or {}
+    urls = sorted(set(re.findall(r"https?://[A-Za-z0-9.\-/_]+", json.dumps(cfg, ensure_ascii=False))))
+    gql = sorted(set(re.findall(r"https?://[A-Za-z0-9.\-]+/[A-Za-z0-9_\-/]*graphql[A-Za-z0-9_\-/]*", page)))
+    return (f"🌐 Lets: chaves do appConfig: {list(cfg.keys())[:15]} | endereços: {' '.join(urls[:15])} | "
+            f"graphql: {' '.join(gql[:5])}")
 
 
 def main():
-    for job in (section_sympla_api, section_central, section_lets, section_peek):
+    for job in (section_sympla_pages, section_sympla_search, section_central_api, section_lets_cfg):
         try:
             say(job())
         except Exception as e:
             say(f"erro numa seção: {type(e).__name__}: {e}")
-    say("✅ Descoberta 3 terminou.")
+    say("✅ Descoberta 4 terminou.")
 
 
 if __name__ == "__main__":
