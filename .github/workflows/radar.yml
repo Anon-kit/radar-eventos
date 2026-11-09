@@ -20,13 +20,14 @@ permissions:
 jobs:
   run:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
 
       - name: Rodar radar
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          ALERT_FEEDS: ${{ secrets.ALERT_FEEDS }}
           FORCE_PROBE: ${{ inputs.probe }}
         run: python3 radar.py
 
