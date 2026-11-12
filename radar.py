@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Radar de eventos da Região Metropolitana de Belo Horizonte -> Telegram. (versão 5)
+Radar de eventos da Região Metropolitana de Belo Horizonte -> Telegram. (versão 6)
 
 - Só usa a biblioteca padrão do Python (nada para instalar).
 - O token do bot vem do Secret TELEGRAM_BOT_TOKEN do GitHub (nunca escreva o token aqui).
@@ -214,14 +214,16 @@ def _kw_regex(kw):
 
 
 _KW = {ch: [(kw, _kw_regex(kw)) for kw in cfg["palavras"]] for ch, cfg in CHANNELS.items()}
+_KW_H = {ch: [_kw_regex(kw) for kw in cfg.get("so_inicio", [])] for ch, cfg in CHANNELS.items()}
 _KW_T = {ch: [_kw_regex(kw) for kw in cfg.get("so_titulo", [])] for ch, cfg in CHANNELS.items()}
 _COMP = {k: [_kw_regex(w) for w in v] for k, v in COMPANION.items()}
 
 
-def match_channels(text, title=""):
-    """Canais cujo tema aparece no texto. Palavras 'so_titulo' (fracas) só valem no 'title',
-    que aqui é o título + o começo da descrição (160 caracteres)."""
+def match_channels(text, head="", title=""):
+    """Canais cujo tema aparece. 'palavras' valem no texto todo; 'so_inicio' no 'head'
+    (título + 160 caracteres da descrição); 'so_titulo' só no título."""
     t = norm(text).replace("pop rock", " ")
+    h = norm(head).replace("pop rock", " ")
     tt = norm(title).replace("pop rock", " ")
     hits = []
     for ch, kws in _KW.items():
@@ -232,6 +234,8 @@ def match_channels(text, title=""):
                     continue
                 found = True
                 break
+        if not found and h and any(rx.search(h) for rx in _KW_H[ch]):
+            found = True
         if not found and tt and any(rx.search(tt) for rx in _KW_T[ch]):
             found = True
         if found:
@@ -333,7 +337,7 @@ def run_shotgun(state, report):
         for slug, it in found.items():
             if slug in seen:
                 continue
-            chans = match_channels(f"{it['title']} {it['raw']}", it["title"])
+            chans = match_channels(f"{it['title']} {it['raw']}", it["title"], it["title"])
             if chans:
                 lines = [f"<b>{html.escape(it['title'])}</b>"]
                 meta = " · ".join(x for x in [it["city"], it["place"]] if x)
@@ -554,7 +558,7 @@ def run_sympla(state, report):
             ended_n += 1 if ev["ended"] else 0
             done.add(sid)
             if ev["official"] and not ev["ended"]:
-                chans = match_channels(ev["text"], ev["head"])
+                chans = match_channels(ev["text"], ev["head"], ev["title"])
                 if chans:
                     lines = [f"<b>{html.escape(ev['title'])}</b>", f"📍 {html.escape(ev['official'])}"]
                     if ev["date"]:
@@ -629,7 +633,7 @@ def run_alerts(state, report):
                 continue
             text = f"{e['title']} {e['text']}"
             city = find_city(text + " " + e["url"])
-            chans = match_channels(text, f"{e['title']} {e['text'][:160]}") if city else []
+            chans = match_channels(text, f"{e['title']} {e['text'][:160]}", e["title"]) if city else []
             if chans:
                 host = urllib.parse.urlparse(e["url"]).netloc.replace("www.", "")
                 out.append({"channels": chans, "text": "\n".join([
@@ -703,7 +707,7 @@ def run_nenety(state, report):
             continue
         parsed += 1
         done.add(nid)
-        chans = match_channels(ev["text"], ev["head"]) if ev["city"] else []
+        chans = match_channels(ev["text"], ev["head"], ev["title"]) if ev["city"] else []
         if chans:
             out.append({"channels": chans, "text": "\n".join([
                 f"<b>{html.escape(ev['title'])}</b>", f"📍 {html.escape(ev['city'])}", html.escape(url),
