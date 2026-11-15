@@ -46,6 +46,21 @@ CHANNELS = {
         "palavras": ["pub", "vida noturna", "craft beer", "cerveja artesanal", "cervejaria"],
         "so_inicio": ["musica ao vivo", "happy hour", "boteco", "balada", "open bar"],
     },
+    "street_food": {
+        "id": "-1004498496361", "emoji": "🍔",
+        "palavras": ["street food", "streetfood", "food truck", "food trucks", "foodtruck", "comida de rua",
+                     "festival de comida", "feira de comida", "feira gastronomica", "festival gastronomico",
+                     "comida de boteco"],
+        "so_inicio": ["gastronomia", "gastronomico", "gastronomica", "culinaria"],
+        "so_titulo": ["burger", "hamburguer", "feijoada", "churrasco", "pizza"],
+    },
+    "alta_gastronomia": {
+        "id": "-1004320965396", "emoji": "🍷",
+        "palavras": ["alta gastronomia", "jantar harmonizado", "menu degustacao", "enogastronomia",
+                     "harmonizacao", "wine dinner", "wine tasting", "cafe especial", "cafes especiais"],
+        "so_inicio": ["gastronomia", "gastronomico", "gastronomica", "culinaria", "degustacao", "chef"],
+        "so_titulo": ["vinho", "vinhos", "queijo", "queijos", "cachaca", "brunch", "wine"],
+    },
     "ceasa_insumos": {
         "id": "-1004303054565", "emoji": "🌾",
         "palavras": ["ceasa", "feira de produtores", "feira de insumos", "insumos", "agroindustria", "agricultura"],
