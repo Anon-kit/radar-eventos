@@ -78,6 +78,7 @@
   "tag:google.com,2013:googlealerts/feed:1558462515533264091",
   "tag:google.com,2013:googlealerts/feed:15607719200703531791",
   "tag:google.com,2013:googlealerts/feed:15681751682687312821",
+  "tag:google.com,2013:googlealerts/feed:15699903900039037952",
   "tag:google.com,2013:googlealerts/feed:15704527212525341324",
   "tag:google.com,2013:googlealerts/feed:15779021125807857448",
   "tag:google.com,2013:googlealerts/feed:15854667931436974928",
@@ -207,6 +208,7 @@
   "tag:google.com,2013:googlealerts/feed:7589671575105179348",
   "tag:google.com,2013:googlealerts/feed:7594783205842027304",
   "tag:google.com,2013:googlealerts/feed:7644290602349643142",
+  "tag:google.com,2013:googlealerts/feed:7924822903930421184",
   "tag:google.com,2013:googlealerts/feed:7924919268566231783",
   "tag:google.com,2013:googlealerts/feed:7961539517800450443",
   "tag:google.com,2013:googlealerts/feed:8057156062018167816",
@@ -261,31 +263,31 @@
    "alerted": false,
    "bad_runs": 0,
    "last_count": 25,
-   "last_ok": "2026-11-17T16:34:59+00:00"
+   "last_ok": "2026-11-17T17:45:20+00:00"
   },
   "Nenety": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 5,
-   "last_ok": "2026-11-17T16:35:00+00:00"
+   "last_ok": "2026-11-17T17:45:21+00:00"
   },
   "Sympla": {
    "alerted": false,
    "bad_runs": 0,
-   "last_count": 23114,
-   "last_ok": "2026-11-17T16:36:53+00:00"
+   "last_count": 24346,
+   "last_ok": "2026-11-17T17:46:48+00:00"
   },
   "Sympla (sitemap)": {
    "alerted": false,
    "bad_runs": 0,
-   "last_count": 23114,
-   "last_ok": "2026-11-17T16:36:00+00:00"
+   "last_count": 24346,
+   "last_ok": "2026-11-17T17:46:47+00:00"
   },
   "Sympla lista": {
    "alerted": false,
    "bad_runs": 0,
-   "last_count": 550,
-   "last_ok": "2026-11-17T16:35:59+00:00"
+   "last_count": 559,
+   "last_ok": "2026-11-17T17:46:46+00:00"
   }
  },
  "last_heartbeat": "2026-11-15T22:23:48+00:00",
@@ -299,7 +301,7 @@
   "4163"
  ],
  "probe_sent": true,
- "sent_week": 16,
+ "sent_week": 17,
  "sympla_extra": {},
  "sympla_fail": {},
  "sympla_lastmod": "2026-11-11T04:04+00:00",
@@ -44070,7 +44072,10 @@
   "3656459",
   "3656497",
   "3656551",
+  "3656571",
   "3656578",
+  "3656581",
+  "3656587",
   "3656626",
   "3656663",
   "3656737",
@@ -44125,7 +44130,20 @@
   "3657840",
   "3657856",
   "3658011",
-  "3658047"
+  "3658047",
+  "3658093",
+  "3658234",
+  "3658281",
+  "3658288",
+  "3658291",
+  "3658294",
+  "3658303",
+  "3658315",
+  "3658340",
+  "3658346",
+  "3658361",
+  "3658387",
+  "3658410"
  ],
  "sympla_stale": true,
  "sympla_stale2": false
