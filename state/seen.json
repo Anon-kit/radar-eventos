@@ -4,6 +4,7 @@
   "tag:google.com,2013:googlealerts/feed:10136001317634806341",
   "tag:google.com,2013:googlealerts/feed:10203797027728119100",
   "tag:google.com,2013:googlealerts/feed:10357763862423923943",
+  "tag:google.com,2013:googlealerts/feed:10360013345426681756",
   "tag:google.com,2013:googlealerts/feed:10421100057326643140",
   "tag:google.com,2013:googlealerts/feed:10816556989547866291",
   "tag:google.com,2013:googlealerts/feed:10923268022335627738",
@@ -46,6 +47,7 @@
   "tag:google.com,2013:googlealerts/feed:13565483733357078329",
   "tag:google.com,2013:googlealerts/feed:1356920511507523793",
   "tag:google.com,2013:googlealerts/feed:13730526242188906485",
+  "tag:google.com,2013:googlealerts/feed:13795446317405282719",
   "tag:google.com,2013:googlealerts/feed:13863589923386456402",
   "tag:google.com,2013:googlealerts/feed:13983965317200706958",
   "tag:google.com,2013:googlealerts/feed:14067609238637661749",
@@ -191,6 +193,7 @@
   "tag:google.com,2013:googlealerts/feed:5637409778831738547",
   "tag:google.com,2013:googlealerts/feed:5735463874885835102",
   "tag:google.com,2013:googlealerts/feed:5736171378027583413",
+  "tag:google.com,2013:googlealerts/feed:5801708836782051473",
   "tag:google.com,2013:googlealerts/feed:5851255622446242224",
   "tag:google.com,2013:googlealerts/feed:5882654642937305582",
   "tag:google.com,2013:googlealerts/feed:5894069002604613686",
@@ -269,31 +272,31 @@
    "alerted": false,
    "bad_runs": 0,
    "last_count": 25,
-   "last_ok": "2026-11-17T18:56:17+00:00"
+   "last_ok": "2026-11-17T20:02:02+00:00"
   },
   "Nenety": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 5,
-   "last_ok": "2026-11-17T18:56:18+00:00"
+   "last_ok": "2026-11-17T20:02:03+00:00"
   },
   "Sympla": {
    "alerted": false,
    "bad_runs": 0,
-   "last_count": 23114,
-   "last_ok": "2026-11-17T18:57:49+00:00"
+   "last_count": 24346,
+   "last_ok": "2026-11-17T20:03:26+00:00"
   },
   "Sympla (sitemap)": {
    "alerted": false,
    "bad_runs": 0,
-   "last_count": 23114,
-   "last_ok": "2026-11-17T18:57:13+00:00"
+   "last_count": 24346,
+   "last_ok": "2026-11-17T20:03:25+00:00"
   },
   "Sympla lista": {
    "alerted": false,
    "bad_runs": 0,
-   "last_count": 558,
-   "last_ok": "2026-11-17T18:57:13+00:00"
+   "last_count": 451,
+   "last_ok": "2026-11-17T20:03:24+00:00"
   }
  },
  "last_heartbeat": "2026-11-15T22:23:48+00:00",
@@ -307,7 +310,7 @@
   "4163"
  ],
  "probe_sent": true,
- "sent_week": 17,
+ "sent_week": 20,
  "sympla_extra": {},
  "sympla_fail": {},
  "sympla_lastmod": "2026-11-11T04:04+00:00",
@@ -44201,6 +44204,7 @@
   "3651659",
   "3651673",
   "3651682",
+  "3651731",
   "3651744",
   "3651830",
   "3651831",
@@ -44447,9 +44451,14 @@
   "3658315",
   "3658340",
   "3658346",
+  "3658348",
   "3658361",
   "3658387",
-  "3658410"
+  "3658410",
+  "3658538",
+  "3658592",
+  "3658621",
+  "3658718"
  ],
  "sympla_stale": true,
  "sympla_stale2": false
