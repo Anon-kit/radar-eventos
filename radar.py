@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Radar de eventos da Região Metropolitana de Belo Horizonte -> Telegram. (versão 6)
+Radar de eventos da Região Metropolitana de Belo Horizonte -> Telegram. (versão 8)
 
 - Só usa a biblioteca padrão do Python (nada para instalar).
 - O token do bot vem do Secret TELEGRAM_BOT_TOKEN do GitHub (nunca escreva o token aqui).
@@ -178,8 +178,63 @@ def tg_send(chat_id, text):
     return False
 
 
+def tg_call(method, **params):
+    """Chamada simples à API do Telegram; sempre devolve um dict com 'ok'."""
+    url = f"https://api.telegram.org/bot{TOKEN}/{method}"
+    try:
+        req = urllib.request.Request(url, data=urllib.parse.urlencode(params).encode())
+        with urllib.request.urlopen(req, timeout=30) as r:
+            return json.loads(r.read().decode("utf-8"))
+    except urllib.error.HTTPError as e:
+        try:
+            return json.loads(e.read().decode("utf-8"))
+        except Exception:
+            return {"ok": False, "description": f"HTTP {e.code}"}
+    except Exception as e:
+        return {"ok": False, "description": type(e).__name__}
+
+
 def notify_status(text):
     tg_send(STATUS_CHAT, text)
+
+
+def check_channels(state, force=False):
+    """Confere, sem postar nada, se o bot é admin COM permissão de postar em todos os canais.
+    Roda 1x por dia (ou quando você roda o workflow com 'probe')."""
+    if DRY_RUN:
+        return
+    now = datetime.now(timezone.utc)
+    last = state.get("channels_checked")
+    if last and not force and (now - datetime.fromisoformat(last)).total_seconds() < 86400:
+        return
+    me = tg_call("getMe")
+    if not me.get("ok"):
+        return
+    bot_id = me["result"]["id"]
+    names = {cfg["id"]: name for name, cfg in CHANNELS.items()}
+    names.setdefault(STATUS_CHAT, "status")
+    problems = state.setdefault("channel_problems", {})
+    newly_bad = []
+    for cid, name in names.items():
+        r = tg_call("getChatMember", chat_id=cid, user_id=bot_id)
+        res = r.get("result") or {}
+        ok = bool(r.get("ok")) and res.get("status") in ("administrator", "creator") \
+            and res.get("can_post_messages", True)
+        if ok:
+            if cid in problems:
+                problems.pop(cid)
+                notify_status(f"✅ Radar: o canal {name} agora está conectado.")
+        elif cid not in problems:
+            problems[cid] = (r.get("description") or f"status {res.get('status', '?')}, sem permissão de postar")[:100]
+            newly_bad.append(f"• {name}: {problems[cid]}")
+    if newly_bad:
+        notify_status("⚠️ Radar: não consigo postar nestes canais (bot sem admin / sem 'Post Messages', "
+                      "ou ID errado):\n" + html.escape("\n".join(newly_bad)))
+    elif not problems and not state.get("channels_verified_once"):
+        notify_status(f"✅ Radar: o bot está conectado, como admin com permissão de postar, nos {len(CHANNELS)} "
+                      "canais de eventos e no canal de status.")
+        state["channels_verified_once"] = True
+    state["channels_checked"] = now.isoformat(timespec="seconds")
 
 
 def run_url():
@@ -436,14 +491,23 @@ def sympla_lastmod():
 
 
 def check_sitemap_age(state):
-    lastmod = sympla_lastmod()
-    if not lastmod:
+    """Avisa se o sitemap da Sympla parar de atualizar. Usa a data MAIS NOVA já vista, porque o
+    índice da Sympla às vezes devolve uma cópia velha (ex.: 2019) e a data nunca volta no tempo."""
+    seen_dt = None
+    try:
+        seen_dt = datetime.fromisoformat(state["sympla_lastmod"])
+    except Exception:
+        pass
+    new_dt = sympla_lastmod()
+    if new_dt and (seen_dt is None or new_dt > seen_dt):
+        seen_dt = new_dt
+    if seen_dt is None:
         return
-    age = (datetime.now(timezone.utc) - lastmod).total_seconds() / 86400
-    state["sympla_lastmod"] = lastmod.isoformat(timespec="minutes")
+    state["sympla_lastmod"] = seen_dt.isoformat(timespec="minutes")
+    age = (datetime.now(timezone.utc) - seen_dt).total_seconds() / 86400
     if age > SYMPLA_STALE_DAYS and not state.get("sympla_stale2"):
         state["sympla_stale2"] = True
-        notify_status(f"⚠️ Radar: o sitemap da Sympla não é atualizado há {age:.0f} dias (normal é ~2 semanas). "
+        notify_status(f"⚠️ Radar: o sitemap da Sympla não é atualizado há {age:.0f} dias (normal é ~1 semana). "
                       "As listas e os alertas do Google continuam cobrindo.")
     elif age <= SYMPLA_STALE_DAYS and state.get("sympla_stale2"):
         state["sympla_stale2"] = False
@@ -814,6 +878,7 @@ def main():
             health_bad(state, name, f"{type(e).__name__}: {e}")
             if first or FORCE_PROBE:
                 report.append(f"{name}: FALHOU - {type(e).__name__}: {e}")
+    check_channels(state, force=FORCE_PROBE)
     sent = 0
     for ev in events[:MAX_SEND_PER_RUN]:
         for ch in ev["channels"]:
