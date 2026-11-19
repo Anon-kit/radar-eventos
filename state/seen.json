@@ -37,6 +37,7 @@
   "tag:google.com,2013:googlealerts/feed:12113735283277607700",
   "tag:google.com,2013:googlealerts/feed:12163171427787666714",
   "tag:google.com,2013:googlealerts/feed:1217701287048698656",
+  "tag:google.com,2013:googlealerts/feed:12216868681545970829",
   "tag:google.com,2013:googlealerts/feed:12237773628810824392",
   "tag:google.com,2013:googlealerts/feed:12239015309450293638",
   "tag:google.com,2013:googlealerts/feed:12304777624743206377",
@@ -161,6 +162,7 @@
   "tag:google.com,2013:googlealerts/feed:18103805048983638230",
   "tag:google.com,2013:googlealerts/feed:18128719213307994512",
   "tag:google.com,2013:googlealerts/feed:18140422638104785828",
+  "tag:google.com,2013:googlealerts/feed:18150314350554002497",
   "tag:google.com,2013:googlealerts/feed:18258746412418234805",
   "tag:google.com,2013:googlealerts/feed:1832894292872228831",
   "tag:google.com,2013:googlealerts/feed:18360014000033858881",
@@ -187,6 +189,7 @@
   "tag:google.com,2013:googlealerts/feed:2890115115918669866",
   "tag:google.com,2013:googlealerts/feed:293095598689409713",
   "tag:google.com,2013:googlealerts/feed:2968285661758203876",
+  "tag:google.com,2013:googlealerts/feed:3031946056102824850",
   "tag:google.com,2013:googlealerts/feed:3040107215813913057",
   "tag:google.com,2013:googlealerts/feed:3044109925960872698",
   "tag:google.com,2013:googlealerts/feed:3079321676706069213",
@@ -254,6 +257,8 @@
   "tag:google.com,2013:googlealerts/feed:5637409778831738547",
   "tag:google.com,2013:googlealerts/feed:5735463874885835102",
   "tag:google.com,2013:googlealerts/feed:5736171378027583413",
+  "tag:google.com,2013:googlealerts/feed:5740142741408953967",
+  "tag:google.com,2013:googlealerts/feed:5751180253555784025",
   "tag:google.com,2013:googlealerts/feed:5801708836782051473",
   "tag:google.com,2013:googlealerts/feed:5828696070054576735",
   "tag:google.com,2013:googlealerts/feed:5851255622446242224",
@@ -267,9 +272,11 @@
   "tag:google.com,2013:googlealerts/feed:6223194761153553874",
   "tag:google.com,2013:googlealerts/feed:6321575794816381889",
   "tag:google.com,2013:googlealerts/feed:6417210240377026773",
+  "tag:google.com,2013:googlealerts/feed:6547505903548728018",
   "tag:google.com,2013:googlealerts/feed:6557036018125430805",
   "tag:google.com,2013:googlealerts/feed:6673138772416227472",
   "tag:google.com,2013:googlealerts/feed:6751976440443551890",
+  "tag:google.com,2013:googlealerts/feed:6769920326899417983",
   "tag:google.com,2013:googlealerts/feed:6775368478070960021",
   "tag:google.com,2013:googlealerts/feed:6779483604516942876",
   "tag:google.com,2013:googlealerts/feed:6950262467729436583",
@@ -315,6 +322,7 @@
   "tag:google.com,2013:googlealerts/feed:9631543190699196668",
   "tag:google.com,2013:googlealerts/feed:9672141464572555287",
   "tag:google.com,2013:googlealerts/feed:9676861652062482251",
+  "tag:google.com,2013:googlealerts/feed:9716606788931947426",
   "tag:google.com,2013:googlealerts/feed:9728494078244192798",
   "tag:google.com,2013:googlealerts/feed:9744414654274478565",
   "tag:google.com,2013:googlealerts/feed:9761702494627972696",
@@ -346,32 +354,32 @@
   "Alertas": {
    "alerted": false,
    "bad_runs": 0,
-   "last_count": 30,
-   "last_ok": "2026-11-19T11:16:07+00:00"
+   "last_count": 29,
+   "last_ok": "2026-11-19T12:28:52+00:00"
   },
   "Nenety": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 5,
-   "last_ok": "2026-11-19T11:16:07+00:00"
+   "last_ok": "2026-11-19T12:28:53+00:00"
   },
   "Sympla": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 22584,
-   "last_ok": "2026-11-19T11:17:13+00:00"
+   "last_ok": "2026-11-19T12:30:43+00:00"
   },
   "Sympla (sitemap)": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 22584,
-   "last_ok": "2026-11-19T11:17:13+00:00"
+   "last_ok": "2026-11-19T12:30:42+00:00"
   },
   "Sympla lista": {
    "alerted": false,
    "bad_runs": 0,
-   "last_count": 642,
-   "last_ok": "2026-11-19T11:17:13+00:00"
+   "last_count": 730,
+   "last_ok": "2026-11-19T12:30:42+00:00"
   }
  },
  "last_heartbeat": "2026-11-15T22:23:48+00:00",
@@ -419,6 +427,7 @@
   "498871",
   "549144",
   "559947",
+  "590003",
   "658040",
   "689049",
   "689052",
@@ -46523,6 +46532,7 @@
   "3651665",
   "3651666",
   "3651668",
+  "3651671",
   "3651673",
   "3651676",
   "3651677",
@@ -51471,6 +51481,7 @@
   "3660075",
   "3660081",
   "3660083",
+  "3660126",
   "3660128",
   "3660184",
   "3660195",
@@ -51487,7 +51498,8 @@
   "3660463",
   "3660475",
   "3660574",
-  "3660607"
+  "3660607",
+  "3660703"
  ],
  "sympla_stale": true,
  "sympla_stale2": false
