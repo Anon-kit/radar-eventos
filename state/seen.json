@@ -73,6 +73,7 @@
   "tag:google.com,2013:googlealerts/feed:13983965317200706958",
   "tag:google.com,2013:googlealerts/feed:14067609238637661749",
   "tag:google.com,2013:googlealerts/feed:14184291477556592051",
+  "tag:google.com,2013:googlealerts/feed:14319144707576075637",
   "tag:google.com,2013:googlealerts/feed:14323963569062207975",
   "tag:google.com,2013:googlealerts/feed:14332832931819654120",
   "tag:google.com,2013:googlealerts/feed:14345601178711476843",
@@ -168,13 +169,16 @@
   "tag:google.com,2013:googlealerts/feed:18258746412418234805",
   "tag:google.com,2013:googlealerts/feed:1832894292872228831",
   "tag:google.com,2013:googlealerts/feed:18360014000033858881",
+  "tag:google.com,2013:googlealerts/feed:18414782071141852549",
   "tag:google.com,2013:googlealerts/feed:18432339016902154864",
+  "tag:google.com,2013:googlealerts/feed:1860628925644491300",
   "tag:google.com,2013:googlealerts/feed:1898086538067753309",
   "tag:google.com,2013:googlealerts/feed:2086329234942737910",
   "tag:google.com,2013:googlealerts/feed:2092374008842663651",
   "tag:google.com,2013:googlealerts/feed:2109003386698280799",
   "tag:google.com,2013:googlealerts/feed:2135744876456024547",
   "tag:google.com,2013:googlealerts/feed:2191516538454874285",
+  "tag:google.com,2013:googlealerts/feed:2435568639294069527",
   "tag:google.com,2013:googlealerts/feed:2460340205022632699",
   "tag:google.com,2013:googlealerts/feed:2505466262488259232",
   "tag:google.com,2013:googlealerts/feed:2528441459726850282",
@@ -258,6 +262,7 @@
   "tag:google.com,2013:googlealerts/feed:5544822026554130438",
   "tag:google.com,2013:googlealerts/feed:5598807934305832636",
   "tag:google.com,2013:googlealerts/feed:5637409778831738547",
+  "tag:google.com,2013:googlealerts/feed:5687784527800135895",
   "tag:google.com,2013:googlealerts/feed:5735463874885835102",
   "tag:google.com,2013:googlealerts/feed:5736171378027583413",
   "tag:google.com,2013:googlealerts/feed:5740142741408953967",
@@ -287,6 +292,7 @@
   "tag:google.com,2013:googlealerts/feed:6784451755606325159",
   "tag:google.com,2013:googlealerts/feed:6950262467729436583",
   "tag:google.com,2013:googlealerts/feed:6975791626601185705",
+  "tag:google.com,2013:googlealerts/feed:7019958826293398020",
   "tag:google.com,2013:googlealerts/feed:707664458789790617",
   "tag:google.com,2013:googlealerts/feed:7180456587042879722",
   "tag:google.com,2013:googlealerts/feed:7230059977646772074",
@@ -361,32 +367,32 @@
   "Alertas": {
    "alerted": false,
    "bad_runs": 0,
-   "last_count": 27,
-   "last_ok": "2026-11-19T15:56:43+00:00"
+   "last_count": 28,
+   "last_ok": "2026-11-19T17:04:22+00:00"
   },
   "Nenety": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 5,
-   "last_ok": "2026-11-19T15:56:44+00:00"
+   "last_ok": "2026-11-19T17:04:23+00:00"
   },
   "Sympla": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 22584,
-   "last_ok": "2026-11-19T15:57:51+00:00"
+   "last_ok": "2026-11-19T17:06:20+00:00"
   },
   "Sympla (sitemap)": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 22584,
-   "last_ok": "2026-11-19T15:57:51+00:00"
+   "last_ok": "2026-11-19T17:06:19+00:00"
   },
   "Sympla lista": {
    "alerted": false,
    "bad_runs": 0,
-   "last_count": 726,
-   "last_ok": "2026-11-19T15:57:50+00:00"
+   "last_count": 730,
+   "last_ok": "2026-11-19T17:06:19+00:00"
   }
  },
  "last_heartbeat": "2026-11-15T22:23:48+00:00",
@@ -51509,7 +51515,9 @@
   "3660703",
   "3660719",
   "3660749",
-  "3660827"
+  "3660827",
+  "3661063",
+  "3661178"
  ],
  "sympla_stale": true,
  "sympla_stale2": false
