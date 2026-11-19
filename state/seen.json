@@ -45,6 +45,7 @@
   "tag:google.com,2013:googlealerts/feed:12360764699212003775",
   "tag:google.com,2013:googlealerts/feed:1239021218163068913",
   "tag:google.com,2013:googlealerts/feed:12394191398964204676",
+  "tag:google.com,2013:googlealerts/feed:1242234141333109107",
   "tag:google.com,2013:googlealerts/feed:1246149264137842109",
   "tag:google.com,2013:googlealerts/feed:12482881541984240852",
   "tag:google.com,2013:googlealerts/feed:1254325111429717737",
@@ -74,6 +75,7 @@
   "tag:google.com,2013:googlealerts/feed:13983965317200706958",
   "tag:google.com,2013:googlealerts/feed:14067609238637661749",
   "tag:google.com,2013:googlealerts/feed:14184291477556592051",
+  "tag:google.com,2013:googlealerts/feed:14272164924393823877",
   "tag:google.com,2013:googlealerts/feed:14319144707576075637",
   "tag:google.com,2013:googlealerts/feed:14323963569062207975",
   "tag:google.com,2013:googlealerts/feed:14332832931819654120",
@@ -370,31 +372,31 @@
    "alerted": false,
    "bad_runs": 0,
    "last_count": 28,
-   "last_ok": "2026-11-19T19:17:08+00:00"
+   "last_ok": "2026-11-19T20:26:47+00:00"
   },
   "Nenety": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 5,
-   "last_ok": "2026-11-19T19:17:10+00:00"
+   "last_ok": "2026-11-19T20:26:49+00:00"
   },
   "Sympla": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 22584,
-   "last_ok": "2026-11-19T19:18:21+00:00"
+   "last_ok": "2026-11-19T20:28:46+00:00"
   },
   "Sympla (sitemap)": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 22584,
-   "last_ok": "2026-11-19T19:18:21+00:00"
+   "last_ok": "2026-11-19T20:28:45+00:00"
   },
   "Sympla lista": {
    "alerted": false,
    "bad_runs": 0,
-   "last_count": 729,
-   "last_ok": "2026-11-19T19:18:20+00:00"
+   "last_count": 719,
+   "last_ok": "2026-11-19T20:28:45+00:00"
   }
  },
  "last_heartbeat": "2026-11-15T22:23:48+00:00",
@@ -51522,7 +51524,13 @@
   "3661063",
   "3661178",
   "3661203",
-  "3661242"
+  "3661242",
+  "3661399",
+  "3661404",
+  "3661411",
+  "3661412",
+  "3661417",
+  "3661432"
  ],
  "sympla_stale": true,
  "sympla_stale2": false
