@@ -129,10 +129,12 @@
   "tag:google.com,2013:googlealerts/feed:15278131195930110290",
   "tag:google.com,2013:googlealerts/feed:1530460394948680950",
   "tag:google.com,2013:googlealerts/feed:15366529635429704637",
+  "tag:google.com,2013:googlealerts/feed:15448524307107874452",
   "tag:google.com,2013:googlealerts/feed:1558462515533264091",
   "tag:google.com,2013:googlealerts/feed:15607719200703531791",
   "tag:google.com,2013:googlealerts/feed:15643860141210935403",
   "tag:google.com,2013:googlealerts/feed:15659554966540536804",
+  "tag:google.com,2013:googlealerts/feed:15664841733438721847",
   "tag:google.com,2013:googlealerts/feed:15681751682687312821",
   "tag:google.com,2013:googlealerts/feed:15699903900039037952",
   "tag:google.com,2013:googlealerts/feed:15704527212525341324",
@@ -399,7 +401,7 @@
   "sympla_lista2": true
  },
  "channel_problems": {},
- "channels_checked": "2026-11-19T15:57:51+00:00",
+ "channels_checked": "2026-11-20T16:31:23+00:00",
  "channels_verified_once": true,
  "feed_init": [
   "409a21cd",
@@ -411,32 +413,32 @@
   "Alertas": {
    "alerted": false,
    "bad_runs": 0,
-   "last_count": 28,
-   "last_ok": "2026-11-20T15:27:30+00:00"
+   "last_count": 29,
+   "last_ok": "2026-11-20T16:29:45+00:00"
   },
   "Nenety": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 5,
-   "last_ok": "2026-11-20T15:27:31+00:00"
+   "last_ok": "2026-11-20T16:29:47+00:00"
   },
   "Sympla": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 22584,
-   "last_ok": "2026-11-20T15:29:17+00:00"
+   "last_ok": "2026-11-20T16:31:23+00:00"
   },
   "Sympla (sitemap)": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 22584,
-   "last_ok": "2026-11-20T15:29:17+00:00"
+   "last_ok": "2026-11-20T16:31:22+00:00"
   },
   "Sympla lista": {
    "alerted": false,
    "bad_runs": 0,
-   "last_count": 714,
-   "last_ok": "2026-11-20T15:29:16+00:00"
+   "last_count": 577,
+   "last_ok": "2026-11-20T16:31:22+00:00"
   }
  },
  "last_heartbeat": "2026-11-15T22:23:48+00:00",
@@ -51521,6 +51523,7 @@
   "3659375",
   "3659380",
   "3659384",
+  "3659395",
   "3659408",
   "3659417",
   "3659458",
