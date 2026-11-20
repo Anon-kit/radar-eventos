@@ -409,31 +409,31 @@
    "alerted": false,
    "bad_runs": 0,
    "last_count": 28,
-   "last_ok": "2026-11-20T10:46:07+00:00"
+   "last_ok": "2026-11-20T11:55:01+00:00"
   },
   "Nenety": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 5,
-   "last_ok": "2026-11-20T10:46:08+00:00"
+   "last_ok": "2026-11-20T11:55:02+00:00"
   },
   "Sympla": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 22584,
-   "last_ok": "2026-11-20T10:47:46+00:00"
+   "last_ok": "2026-11-20T11:55:55+00:00"
   },
   "Sympla (sitemap)": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 22584,
-   "last_ok": "2026-11-20T10:47:46+00:00"
+   "last_ok": "2026-11-20T11:55:55+00:00"
   },
   "Sympla lista": {
    "alerted": false,
    "bad_runs": 0,
-   "last_count": 714,
-   "last_ok": "2026-11-20T10:47:46+00:00"
+   "last_count": 592,
+   "last_ok": "2026-11-20T11:55:55+00:00"
   }
  },
  "last_heartbeat": "2026-11-15T22:23:48+00:00",
