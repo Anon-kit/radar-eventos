@@ -85,6 +85,7 @@
   "tag:google.com,2013:googlealerts/feed:13149507699599147287",
   "tag:google.com,2013:googlealerts/feed:13225711706090030620",
   "tag:google.com,2013:googlealerts/feed:13269273085665841664",
+  "tag:google.com,2013:googlealerts/feed:13328034735690747144",
   "tag:google.com,2013:googlealerts/feed:13407316399572211447",
   "tag:google.com,2013:googlealerts/feed:13546608492526200419",
   "tag:google.com,2013:googlealerts/feed:13565483733357078329",
@@ -357,6 +358,7 @@
   "tag:google.com,2013:googlealerts/feed:5882654642937305582",
   "tag:google.com,2013:googlealerts/feed:5894069002604613686",
   "tag:google.com,2013:googlealerts/feed:5915476656819342466",
+  "tag:google.com,2013:googlealerts/feed:5925962587636240476",
   "tag:google.com,2013:googlealerts/feed:5961031656169287276",
   "tag:google.com,2013:googlealerts/feed:5976745084190840390",
   "tag:google.com,2013:googlealerts/feed:6163149490058274093",
@@ -468,32 +470,32 @@
   "Alertas": {
    "alerted": false,
    "bad_runs": 0,
-   "last_count": 30,
-   "last_ok": "2026-11-21T23:13:29+00:00"
+   "last_count": 29,
+   "last_ok": "2026-11-21T23:56:21+00:00"
   },
   "Nenety": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 5,
-   "last_ok": "2026-11-21T23:13:30+00:00"
+   "last_ok": "2026-11-21T23:56:22+00:00"
   },
   "Sympla": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 22584,
-   "last_ok": "2026-11-21T23:15:12+00:00"
+   "last_ok": "2026-11-21T23:58:21+00:00"
   },
   "Sympla (sitemap)": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 22584,
-   "last_ok": "2026-11-21T23:15:12+00:00"
+   "last_ok": "2026-11-21T23:58:21+00:00"
   },
   "Sympla lista": {
    "alerted": false,
    "bad_runs": 0,
-   "last_count": 637,
-   "last_ok": "2026-11-21T23:15:12+00:00"
+   "last_count": 640,
+   "last_ok": "2026-11-21T23:58:20+00:00"
   }
  },
  "last_heartbeat": "2026-11-15T22:23:48+00:00",
@@ -51667,6 +51669,7 @@
   "3662250",
   "3662260",
   "3662319",
+  "3662342",
   "3662349",
   "3662351",
   "3662383",
