@@ -6,6 +6,7 @@ Cada canal recebe o evento se bater em qualquer uma destas listas:
 - "palavras":  valem em qualquer lugar do texto (título + descrição).
 - "so_inicio": palavras fracas; só valem no título ou nos primeiros 160 caracteres da descrição.
 - "so_titulo": palavras muito fracas; só valem se estiverem no TÍTULO do evento.
+- "excluir":   se alguma destas aparecer em qualquer lugar do texto, o canal NÃO recebe o evento.
 Sem acentos e em minúsculas.
 """
 
@@ -17,6 +18,8 @@ CHANNELS = {
         "id": "-1003901653814", "emoji": "🤘",
         "palavras": ["metal", "heavy metal", "underground", "thrash", "hard rock"],
         "so_inicio": ["rock", "punk", "hardcore"],
+        "excluir": ["visita tecnica", "construcao civil", "metalurgia", "steel frame", "light steel",
+                    "estrutura metalica", "crea jr", "crea mg"],
     },
     "eletronica": {
         "id": "-1003920893409", "emoji": "🎛",
@@ -57,8 +60,9 @@ CHANNELS = {
     "alta_gastronomia": {
         "id": "-1004320965396", "emoji": "🍷",
         "palavras": ["alta gastronomia", "jantar harmonizado", "menu degustacao", "enogastronomia",
-                     "harmonizacao", "wine dinner", "wine tasting", "cafe especial", "cafes especiais"],
-        "so_inicio": ["gastronomia", "gastronomico", "gastronomica", "culinaria", "degustacao", "chef"],
+                     "wine dinner", "wine tasting"],
+        "so_inicio": ["gastronomia", "gastronomico", "gastronomica", "culinaria", "degustacao", "chef",
+                      "cafe especial", "cafes especiais"],
         "so_titulo": ["vinho", "vinhos", "queijo", "queijos", "cachaca", "brunch", "wine"],
     },
     "ceasa_insumos": {
@@ -79,3 +83,7 @@ CHANNELS = {
 
 # Palavras que só valem se vierem junto de outra do grupo (evita "house" = casa).
 COMPANION = {"house": ["techno", "rave", "eletronica", "edm", "trance", "psytrance", "dj", "djs", "deep", "tech"]}
+
+# Grupos em que o evento vai para UM canal só: o de palavra mais forte; empate fraco = o primeiro
+# da lista; se bater com palavra forte nos dois, vai para os dois. Evita o mesmo aviso em dois canais.
+GRUPOS_EXCLUSIVOS = [("alta_gastronomia", "street_food")]
