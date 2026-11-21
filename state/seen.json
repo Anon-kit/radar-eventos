@@ -414,7 +414,7 @@
   "sympla_lista2": true
  },
  "channel_problems": {},
- "channels_checked": "2026-11-20T16:31:23+00:00",
+ "channels_checked": "2026-11-21T03:11:51+00:00",
  "channels_verified_once": true,
  "feed_init": [
   "409a21cd",
@@ -427,31 +427,31 @@
    "alerted": false,
    "bad_runs": 0,
    "last_count": 27,
-   "last_ok": "2026-11-21T02:49:14+00:00"
+   "last_ok": "2026-11-21T03:09:51+00:00"
   },
   "Nenety": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 5,
-   "last_ok": "2026-11-21T02:49:15+00:00"
+   "last_ok": "2026-11-21T03:09:51+00:00"
   },
   "Sympla": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 22584,
-   "last_ok": "2026-11-21T02:50:23+00:00"
+   "last_ok": "2026-11-21T03:11:51+00:00"
   },
   "Sympla (sitemap)": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 22584,
-   "last_ok": "2026-11-21T02:50:23+00:00"
+   "last_ok": "2026-11-21T03:11:50+00:00"
   },
   "Sympla lista": {
    "alerted": false,
    "bad_runs": 0,
-   "last_count": 705,
-   "last_ok": "2026-11-21T02:50:23+00:00"
+   "last_count": 687,
+   "last_ok": "2026-11-21T03:11:50+00:00"
   }
  },
  "last_heartbeat": "2026-11-15T22:23:48+00:00",
@@ -51617,7 +51617,8 @@
   "3662134",
   "3662136",
   "3662141",
-  "3662185"
+  "3662185",
+  "3662223"
  ],
  "sympla_stale": true,
  "sympla_stale2": false
