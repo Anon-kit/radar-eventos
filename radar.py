@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Radar de eventos da Região Metropolitana de Belo Horizonte -> Telegram. (versão 8)
+Radar de eventos da Região Metropolitana de Belo Horizonte -> Telegram. (versão 10)
 
 - Só usa a biblioteca padrão do Python (nada para instalar).
 - O token do bot vem do Secret TELEGRAM_BOT_TOKEN do GitHub (nunca escreva o token aqui).
@@ -30,7 +30,10 @@ DRY_RUN = os.environ.get("RADAR_DRY_RUN", "") == "1"
 FORCE_PROBE = os.environ.get("FORCE_PROBE", "").strip().lower() in ("1", "true", "yes")
 STATE_FILE = Path("state/seen.json")
 
-from topics import CHANNELS, COMPANION, STATUS_CHAT  # noqa: E402  (temas e canais: veja topics.py)
+import topics as _topics  # noqa: E402  (temas e canais: veja topics.py)
+from topics import CHANNELS, COMPANION, STATUS_CHAT  # noqa: E402
+
+GRUPOS_EXCLUSIVOS = getattr(_topics, "GRUPOS_EXCLUSIVOS", [])
 
 # Região Metropolitana de BH (34 municípios). Acrescente outras cidades aqui se quiser.
 RMBH = [
@@ -271,31 +274,43 @@ def _kw_regex(kw):
 _KW = {ch: [(kw, _kw_regex(kw)) for kw in cfg["palavras"]] for ch, cfg in CHANNELS.items()}
 _KW_H = {ch: [_kw_regex(kw) for kw in cfg.get("so_inicio", [])] for ch, cfg in CHANNELS.items()}
 _KW_T = {ch: [_kw_regex(kw) for kw in cfg.get("so_titulo", [])] for ch, cfg in CHANNELS.items()}
+_KW_X = {ch: [_kw_regex(kw) for kw in cfg.get("excluir", [])] for ch, cfg in CHANNELS.items()}
 _COMP = {k: [_kw_regex(w) for w in v] for k, v in COMPANION.items()}
 
 
 def match_channels(text, head="", title=""):
-    """Canais cujo tema aparece. 'palavras' valem no texto todo; 'so_inicio' no 'head'
-    (título + 160 caracteres da descrição); 'so_titulo' só no título."""
+    """Canais cujo tema aparece. 'palavras' valem no texto todo (nível 3); 'so_inicio' no 'head'
+    (título + 160 caracteres da descrição, nível 2); 'so_titulo' só no título (nível 1).
+    Em cada grupo de GRUPOS_EXCLUSIVOS o evento vai só para o canal de nível mais alto; empate
+    fraco fica com o primeiro do grupo; empate forte (nível 3 nos dois) vai para os dois."""
     t = norm(text).replace("pop rock", " ")
     h = norm(head).replace("pop rock", " ")
     tt = norm(title).replace("pop rock", " ")
-    hits = []
+    levels = {}
     for ch, kws in _KW.items():
-        found = False
+        level = 0
         for kw, rx in kws:
             if rx.search(t):
                 if kw in _COMP and not any(c.search(t) for c in _COMP[kw]):
                     continue
-                found = True
+                level = 3
                 break
-        if not found and h and any(rx.search(h) for rx in _KW_H[ch]):
-            found = True
-        if not found and tt and any(rx.search(tt) for rx in _KW_T[ch]):
-            found = True
-        if found:
-            hits.append(ch)
-    return hits
+        if not level and h and any(rx.search(h) for rx in _KW_H[ch]):
+            level = 2
+        if not level and tt and any(rx.search(tt) for rx in _KW_T[ch]):
+            level = 1
+        if level and not any(rx.search(t) for rx in _KW_X[ch]):
+            levels[ch] = level
+    for group in GRUPOS_EXCLUSIVOS:
+        present = [c for c in group if c in levels]
+        if len(present) > 1:
+            best = max(levels[c] for c in present)
+            top = [c for c in present if levels[c] == best]
+            keep = top if best == 3 else top[:1]
+            for c in present:
+                if c not in keep:
+                    del levels[c]
+    return list(levels)
 
 
 # ---------------------------------- Shotgun ----------------------------------
