@@ -182,6 +182,7 @@
   "tag:google.com,2013:googlealerts/feed:16375785158198713298",
   "tag:google.com,2013:googlealerts/feed:16384847068423325811",
   "tag:google.com,2013:googlealerts/feed:16387198208420998385",
+  "tag:google.com,2013:googlealerts/feed:1649887816574150439",
   "tag:google.com,2013:googlealerts/feed:16528929480698917458",
   "tag:google.com,2013:googlealerts/feed:16561072769565451073",
   "tag:google.com,2013:googlealerts/feed:16571491658502170717",
@@ -243,6 +244,7 @@
   "tag:google.com,2013:googlealerts/feed:1860628925644491300",
   "tag:google.com,2013:googlealerts/feed:1898086538067753309",
   "tag:google.com,2013:googlealerts/feed:1932374755359893375",
+  "tag:google.com,2013:googlealerts/feed:201302123319703946",
   "tag:google.com,2013:googlealerts/feed:2086329234942737910",
   "tag:google.com,2013:googlealerts/feed:2086975787753854987",
   "tag:google.com,2013:googlealerts/feed:2092374008842663651",
@@ -353,6 +355,7 @@
   "tag:google.com,2013:googlealerts/feed:5396091107810817300",
   "tag:google.com,2013:googlealerts/feed:539835406460881276",
   "tag:google.com,2013:googlealerts/feed:5467978487828995192",
+  "tag:google.com,2013:googlealerts/feed:5520255094495489489",
   "tag:google.com,2013:googlealerts/feed:5544822026554130438",
   "tag:google.com,2013:googlealerts/feed:5598807934305832636",
   "tag:google.com,2013:googlealerts/feed:5637409778831738547",
@@ -491,31 +494,31 @@
    "alerted": false,
    "bad_runs": 0,
    "last_count": 22,
-   "last_ok": "2026-11-22T16:22:48+00:00"
+   "last_ok": "2026-11-22T17:17:53+00:00"
   },
   "Nenety": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 5,
-   "last_ok": "2026-11-22T16:22:49+00:00"
+   "last_ok": "2026-11-22T17:17:54+00:00"
   },
   "Sympla": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 22584,
-   "last_ok": "2026-11-22T16:23:58+00:00"
+   "last_ok": "2026-11-22T17:19:43+00:00"
   },
   "Sympla (sitemap)": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 22584,
-   "last_ok": "2026-11-22T16:23:57+00:00"
+   "last_ok": "2026-11-22T17:19:42+00:00"
   },
   "Sympla lista": {
    "alerted": false,
    "bad_runs": 0,
-   "last_count": 590,
-   "last_ok": "2026-11-22T16:23:57+00:00"
+   "last_count": 596,
+   "last_ok": "2026-11-22T17:19:42+00:00"
   }
  },
  "last_heartbeat": "2026-11-15T22:23:48+00:00",
@@ -51666,6 +51669,7 @@
   "3661573",
   "3661638",
   "3661647",
+  "3661735",
   "3661736",
   "3661795",
   "3661798",
@@ -51708,7 +51712,8 @@
   "3662680",
   "3662727",
   "3662735",
-  "3662737"
+  "3662737",
+  "3662771"
  ],
  "sympla_stale": true,
  "sympla_stale2": false
