@@ -34,6 +34,7 @@
   "tag:google.com,2013:googlealerts/feed:11564434801080093063",
   "tag:google.com,2013:googlealerts/feed:11569367139058326452",
   "tag:google.com,2013:googlealerts/feed:11599211854675262567",
+  "tag:google.com,2013:googlealerts/feed:11637024725056719788",
   "tag:google.com,2013:googlealerts/feed:11641505156423077990",
   "tag:google.com,2013:googlealerts/feed:11721789020787874938",
   "tag:google.com,2013:googlealerts/feed:1174201875140617185",
@@ -296,6 +297,7 @@
   "tag:google.com,2013:googlealerts/feed:4065167832871191252",
   "tag:google.com,2013:googlealerts/feed:4074488970414455331",
   "tag:google.com,2013:googlealerts/feed:407695562364130868",
+  "tag:google.com,2013:googlealerts/feed:4088898825557054226",
   "tag:google.com,2013:googlealerts/feed:4098321002415044033",
   "tag:google.com,2013:googlealerts/feed:4099927989602439847",
   "tag:google.com,2013:googlealerts/feed:4115435409466046128",
@@ -471,31 +473,31 @@
    "alerted": false,
    "bad_runs": 0,
    "last_count": 29,
-   "last_ok": "2026-11-22T01:00:08+00:00"
+   "last_ok": "2026-11-22T02:20:30+00:00"
   },
   "Nenety": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 5,
-   "last_ok": "2026-11-22T01:00:09+00:00"
+   "last_ok": "2026-11-22T02:20:31+00:00"
   },
   "Sympla": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 22584,
-   "last_ok": "2026-11-22T01:01:20+00:00"
+   "last_ok": "2026-11-22T02:22:13+00:00"
   },
   "Sympla (sitemap)": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 22584,
-   "last_ok": "2026-11-22T01:01:20+00:00"
+   "last_ok": "2026-11-22T02:22:12+00:00"
   },
   "Sympla lista": {
    "alerted": false,
    "bad_runs": 0,
-   "last_count": 636,
-   "last_ok": "2026-11-22T01:01:20+00:00"
+   "last_count": 623,
+   "last_ok": "2026-11-22T02:22:12+00:00"
   }
  },
  "last_heartbeat": "2026-11-15T22:23:48+00:00",
@@ -509,7 +511,7 @@
   "4163"
  ],
  "probe_sent": true,
- "sent_week": 102,
+ "sent_week": 103,
  "sympla_extra": {},
  "sympla_fail": {},
  "sympla_lastmod": "2026-11-18T04:04+00:00",
@@ -51624,7 +51626,9 @@
   "3660719",
   "3660749",
   "3660827",
+  "3660839",
   "3661063",
+  "3661120",
   "3661178",
   "3661203",
   "3661242",
