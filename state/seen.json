@@ -11,6 +11,9 @@
   "tag:google.com,2013:googlealerts/feed:10360013345426681756",
   "tag:google.com,2013:googlealerts/feed:10421100057326643140",
   "tag:google.com,2013:googlealerts/feed:10461055435370152291",
+  "tag:google.com,2013:googlealerts/feed:10493071718448357296",
+  "tag:google.com,2013:googlealerts/feed:10595831835758279910",
+  "tag:google.com,2013:googlealerts/feed:10602180929499098936",
   "tag:google.com,2013:googlealerts/feed:10659297882810801840",
   "tag:google.com,2013:googlealerts/feed:10696478431116474725",
   "tag:google.com,2013:googlealerts/feed:10711345529793833827",
@@ -110,6 +113,7 @@
   "tag:google.com,2013:googlealerts/feed:14067609238637661749",
   "tag:google.com,2013:googlealerts/feed:14092165909511074208",
   "tag:google.com,2013:googlealerts/feed:14106993306022174842",
+  "tag:google.com,2013:googlealerts/feed:14157786843377214830",
   "tag:google.com,2013:googlealerts/feed:14159284261035709850",
   "tag:google.com,2013:googlealerts/feed:14184291477556592051",
   "tag:google.com,2013:googlealerts/feed:14205343013564427850",
@@ -350,11 +354,13 @@
   "tag:google.com,2013:googlealerts/feed:4402176801370504873",
   "tag:google.com,2013:googlealerts/feed:4469136328800829118",
   "tag:google.com,2013:googlealerts/feed:4482124115025948478",
+  "tag:google.com,2013:googlealerts/feed:4504854416688516422",
   "tag:google.com,2013:googlealerts/feed:450835275733709529",
   "tag:google.com,2013:googlealerts/feed:45289545902054126",
   "tag:google.com,2013:googlealerts/feed:4572107293316883211",
   "tag:google.com,2013:googlealerts/feed:4589425072736061752",
   "tag:google.com,2013:googlealerts/feed:474416657431977276",
+  "tag:google.com,2013:googlealerts/feed:4788311451649875814",
   "tag:google.com,2013:googlealerts/feed:4813773035446691252",
   "tag:google.com,2013:googlealerts/feed:4843453705766912678",
   "tag:google.com,2013:googlealerts/feed:4844388249666908604",
@@ -443,6 +449,7 @@
   "tag:google.com,2013:googlealerts/feed:7537629205843278998",
   "tag:google.com,2013:googlealerts/feed:7589671575105179348",
   "tag:google.com,2013:googlealerts/feed:7594783205842027304",
+  "tag:google.com,2013:googlealerts/feed:7600660647347318985",
   "tag:google.com,2013:googlealerts/feed:7626441326306539913",
   "tag:google.com,2013:googlealerts/feed:7644290602349643142",
   "tag:google.com,2013:googlealerts/feed:7778995986024824851",
@@ -470,6 +477,7 @@
   "tag:google.com,2013:googlealerts/feed:8568049315204985079",
   "tag:google.com,2013:googlealerts/feed:8620631543072403352",
   "tag:google.com,2013:googlealerts/feed:8647912851291375198",
+  "tag:google.com,2013:googlealerts/feed:8658585361796254061",
   "tag:google.com,2013:googlealerts/feed:8824272983655792912",
   "tag:google.com,2013:googlealerts/feed:8834718256960361906",
   "tag:google.com,2013:googlealerts/feed:8881197314325599664",
@@ -527,31 +535,31 @@
    "alerted": false,
    "bad_runs": 0,
    "last_count": 22,
-   "last_ok": "2026-11-23T16:01:42+00:00"
+   "last_ok": "2026-11-23T17:18:53+00:00"
   },
   "Nenety": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 5,
-   "last_ok": "2026-11-23T16:01:43+00:00"
+   "last_ok": "2026-11-23T17:18:54+00:00"
   },
   "Sympla": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 22584,
-   "last_ok": "2026-11-23T16:02:33+00:00"
+   "last_ok": "2026-11-23T17:20:44+00:00"
   },
   "Sympla (sitemap)": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 22584,
-   "last_ok": "2026-11-23T16:02:33+00:00"
+   "last_ok": "2026-11-23T17:20:42+00:00"
   },
   "Sympla lista": {
    "alerted": false,
    "bad_runs": 0,
-   "last_count": 509,
-   "last_ok": "2026-11-23T16:02:33+00:00"
+   "last_count": 630,
+   "last_ok": "2026-11-23T17:20:42+00:00"
   }
  },
  "last_heartbeat": "2026-11-22T22:30:25+00:00",
@@ -565,7 +573,7 @@
   "4163"
  ],
  "probe_sent": true,
- "sent_week": 3,
+ "sent_week": 5,
  "sympla_extra": {},
  "sympla_fail": {},
  "sympla_lastmod": "2026-11-18T04:04+00:00",
@@ -18175,6 +18183,7 @@
   "3530128",
   "3530143",
   "3530195",
+  "3530202",
   "3530244",
   "3530264",
   "3530288",
@@ -51768,6 +51777,7 @@
   "3662888",
   "3662917",
   "3662924",
+  "3662996",
   "3663002",
   "3663005",
   "3663051",
@@ -51776,11 +51786,23 @@
   "3663119",
   "3663121",
   "3663161",
+  "3663385",
   "3663424",
   "3663485",
   "3663491",
   "3663530",
-  "3663566"
+  "3663549",
+  "3663560",
+  "3663566",
+  "3663571",
+  "3663572",
+  "3663606",
+  "3663638",
+  "3663698",
+  "3663703",
+  "3663707",
+  "3663714",
+  "3663747"
  ],
  "sympla_stale": true,
  "sympla_stale2": false
