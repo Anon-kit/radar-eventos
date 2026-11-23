@@ -312,6 +312,7 @@
   "tag:google.com,2013:googlealerts/feed:3924101844408677267",
   "tag:google.com,2013:googlealerts/feed:3938320304933016416",
   "tag:google.com,2013:googlealerts/feed:3957579872987137120",
+  "tag:google.com,2013:googlealerts/feed:3984978203490378024",
   "tag:google.com,2013:googlealerts/feed:4006454297068831338",
   "tag:google.com,2013:googlealerts/feed:4065167832871191252",
   "tag:google.com,2013:googlealerts/feed:4074488970414455331",
@@ -343,6 +344,7 @@
   "tag:google.com,2013:googlealerts/feed:474416657431977276",
   "tag:google.com,2013:googlealerts/feed:4813773035446691252",
   "tag:google.com,2013:googlealerts/feed:4843453705766912678",
+  "tag:google.com,2013:googlealerts/feed:4844388249666908604",
   "tag:google.com,2013:googlealerts/feed:4861012442759115918",
   "tag:google.com,2013:googlealerts/feed:4873695643073929106",
   "tag:google.com,2013:googlealerts/feed:4931186189029976022",
@@ -494,7 +496,7 @@
   "sympla_lista2": true
  },
  "channel_problems": {},
- "channels_checked": "2026-11-22T03:23:00+00:00",
+ "channels_checked": "2026-11-23T04:01:52+00:00",
  "channels_verified_once": true,
  "feed_init": [
   "409a21cd",
@@ -507,31 +509,31 @@
    "alerted": false,
    "bad_runs": 0,
    "last_count": 22,
-   "last_ok": "2026-11-23T02:54:58+00:00"
+   "last_ok": "2026-11-23T04:00:39+00:00"
   },
   "Nenety": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 5,
-   "last_ok": "2026-11-23T02:54:59+00:00"
+   "last_ok": "2026-11-23T04:00:40+00:00"
   },
   "Sympla": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 22584,
-   "last_ok": "2026-11-23T02:56:51+00:00"
+   "last_ok": "2026-11-23T04:01:52+00:00"
   },
   "Sympla (sitemap)": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 22584,
-   "last_ok": "2026-11-23T02:56:50+00:00"
+   "last_ok": "2026-11-23T04:01:51+00:00"
   },
   "Sympla lista": {
    "alerted": false,
    "bad_runs": 0,
-   "last_count": 591,
-   "last_ok": "2026-11-23T02:56:50+00:00"
+   "last_count": 590,
+   "last_ok": "2026-11-23T04:01:50+00:00"
   }
  },
  "last_heartbeat": "2026-11-22T22:30:25+00:00",
@@ -10328,6 +10330,7 @@
   "1384330",
   "1384426",
   "1385126",
+  "1385224",
   "1385503",
   "1385841",
   "1386067",
@@ -51735,6 +51738,7 @@
   "3662737",
   "3662771",
   "3662832",
+  "3662881",
   "3662888",
   "3662924",
   "3663005"
