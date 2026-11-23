@@ -111,6 +111,7 @@
   "tag:google.com,2013:googlealerts/feed:1375913653567910783",
   "tag:google.com,2013:googlealerts/feed:13795446317405282719",
   "tag:google.com,2013:googlealerts/feed:1379591098733727322",
+  "tag:google.com,2013:googlealerts/feed:13855785643591364996",
   "tag:google.com,2013:googlealerts/feed:13863589923386456402",
   "tag:google.com,2013:googlealerts/feed:13983965317200706958",
   "tag:google.com,2013:googlealerts/feed:14067609238637661749",
@@ -396,6 +397,7 @@
   "tag:google.com,2013:googlealerts/feed:5467978487828995192",
   "tag:google.com,2013:googlealerts/feed:5520255094495489489",
   "tag:google.com,2013:googlealerts/feed:5544822026554130438",
+  "tag:google.com,2013:googlealerts/feed:5573810303051498359",
   "tag:google.com,2013:googlealerts/feed:5598807934305832636",
   "tag:google.com,2013:googlealerts/feed:5637409778831738547",
   "tag:google.com,2013:googlealerts/feed:5687784527800135895",
@@ -543,32 +545,32 @@
   "Alertas": {
    "alerted": false,
    "bad_runs": 0,
-   "last_count": 22,
-   "last_ok": "2026-11-23T19:34:09+00:00"
+   "last_count": 21,
+   "last_ok": "2026-11-23T20:31:23+00:00"
   },
   "Nenety": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 5,
-   "last_ok": "2026-11-23T19:34:10+00:00"
+   "last_ok": "2026-11-23T20:31:24+00:00"
   },
   "Sympla": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 22584,
-   "last_ok": "2026-11-23T19:35:49+00:00"
+   "last_ok": "2026-11-23T20:32:29+00:00"
   },
   "Sympla (sitemap)": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 22584,
-   "last_ok": "2026-11-23T19:35:48+00:00"
+   "last_ok": "2026-11-23T20:32:29+00:00"
   },
   "Sympla lista": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 652,
-   "last_ok": "2026-11-23T19:35:48+00:00"
+   "last_ok": "2026-11-23T20:32:28+00:00"
   }
  },
  "last_heartbeat": "2026-11-22T22:30:25+00:00",
@@ -51678,6 +51680,7 @@
   "3659708",
   "3659724",
   "3659778",
+  "3659877",
   "3659885",
   "3659913",
   "3659974",
@@ -51820,6 +51823,7 @@
   "3663898",
   "3663915",
   "3663935",
+  "3663941",
   "3663947",
   "3663999",
   "3664023",
