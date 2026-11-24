@@ -424,6 +424,7 @@
   "tag:google.com,2013:googlealerts/feed:5573810303051498359",
   "tag:google.com,2013:googlealerts/feed:5598807934305832636",
   "tag:google.com,2013:googlealerts/feed:5637409778831738547",
+  "tag:google.com,2013:googlealerts/feed:5644549476961913163",
   "tag:google.com,2013:googlealerts/feed:5687784527800135895",
   "tag:google.com,2013:googlealerts/feed:5695379466637370433",
   "tag:google.com,2013:googlealerts/feed:5695717915329443619",
@@ -507,6 +508,7 @@
   "tag:google.com,2013:googlealerts/feed:8182491112950329380",
   "tag:google.com,2013:googlealerts/feed:8187070997048732215",
   "tag:google.com,2013:googlealerts/feed:8224278431194823254",
+  "tag:google.com,2013:googlealerts/feed:822793158696098751",
   "tag:google.com,2013:googlealerts/feed:8246727974154493583",
   "tag:google.com,2013:googlealerts/feed:8256519842761153846",
   "tag:google.com,2013:googlealerts/feed:8305088544606270435",
@@ -587,31 +589,31 @@
    "alerted": false,
    "bad_runs": 0,
    "last_count": 22,
-   "last_ok": "2026-11-24T22:41:02+00:00"
+   "last_ok": "2026-11-24T23:35:08+00:00"
   },
   "Nenety": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 6,
-   "last_ok": "2026-11-24T22:41:03+00:00"
+   "last_ok": "2026-11-24T23:35:09+00:00"
   },
   "Sympla": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 22584,
-   "last_ok": "2026-11-24T22:43:01+00:00"
+   "last_ok": "2026-11-24T23:36:19+00:00"
   },
   "Sympla (sitemap)": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 22584,
-   "last_ok": "2026-11-24T22:43:01+00:00"
+   "last_ok": "2026-11-24T23:36:18+00:00"
   },
   "Sympla lista": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 734,
-   "last_ok": "2026-11-24T22:43:00+00:00"
+   "last_ok": "2026-11-24T23:36:18+00:00"
   }
  },
  "last_heartbeat": "2026-11-22T22:30:25+00:00",
@@ -626,7 +628,7 @@
   "4250"
  ],
  "probe_sent": true,
- "sent_week": 30,
+ "sent_week": 31,
  "sympla_extra": {},
  "sympla_fail": {},
  "sympla_lastmod": "2026-11-18T04:04+00:00",
@@ -51951,8 +51953,10 @@
   "3665036",
   "3665061",
   "3665068",
+  "3665124",
   "3665139",
   "3665173",
+  "3665183",
   "3665321",
   "3665339",
   "3665376",
