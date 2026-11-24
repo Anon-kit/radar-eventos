@@ -14,6 +14,7 @@
   "tag:google.com,2013:googlealerts/feed:10493071718448357296",
   "tag:google.com,2013:googlealerts/feed:10595831835758279910",
   "tag:google.com,2013:googlealerts/feed:10602180929499098936",
+  "tag:google.com,2013:googlealerts/feed:10653064258235387315",
   "tag:google.com,2013:googlealerts/feed:10659297882810801840",
   "tag:google.com,2013:googlealerts/feed:10696478431116474725",
   "tag:google.com,2013:googlealerts/feed:10711345529793833827",
@@ -223,6 +224,7 @@
   "tag:google.com,2013:googlealerts/feed:16528929480698917458",
   "tag:google.com,2013:googlealerts/feed:16561072769565451073",
   "tag:google.com,2013:googlealerts/feed:16571491658502170717",
+  "tag:google.com,2013:googlealerts/feed:16573051456246404",
   "tag:google.com,2013:googlealerts/feed:16632588293376674123",
   "tag:google.com,2013:googlealerts/feed:16678964873157852035",
   "tag:google.com,2013:googlealerts/feed:16719084016423645466",
@@ -585,31 +587,31 @@
    "alerted": false,
    "bad_runs": 0,
    "last_count": 22,
-   "last_ok": "2026-11-24T21:39:55+00:00"
+   "last_ok": "2026-11-24T22:41:02+00:00"
   },
   "Nenety": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 6,
-   "last_ok": "2026-11-24T21:39:56+00:00"
+   "last_ok": "2026-11-24T22:41:03+00:00"
   },
   "Sympla": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 22584,
-   "last_ok": "2026-11-24T21:41:05+00:00"
+   "last_ok": "2026-11-24T22:43:01+00:00"
   },
   "Sympla (sitemap)": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 22584,
-   "last_ok": "2026-11-24T21:41:04+00:00"
+   "last_ok": "2026-11-24T22:43:01+00:00"
   },
   "Sympla lista": {
    "alerted": false,
    "bad_runs": 0,
-   "last_count": 716,
-   "last_ok": "2026-11-24T21:41:04+00:00"
+   "last_count": 734,
+   "last_ok": "2026-11-24T22:43:00+00:00"
   }
  },
  "last_heartbeat": "2026-11-22T22:30:25+00:00",
@@ -624,7 +626,7 @@
   "4250"
  ],
  "probe_sent": true,
- "sent_week": 27,
+ "sent_week": 30,
  "sympla_extra": {},
  "sympla_fail": {},
  "sympla_lastmod": "2026-11-18T04:04+00:00",
@@ -51888,6 +51890,7 @@
   "3664061",
   "3664066",
   "3664073",
+  "3664087",
   "3664106",
   "3664130",
   "3664161",
@@ -51923,6 +51926,7 @@
   "3664593",
   "3664613",
   "3664615",
+  "3664628",
   "3664723",
   "3664734",
   "3664797",
@@ -51962,7 +51966,16 @@
   "3665592",
   "3665617",
   "3665623",
-  "3665634"
+  "3665634",
+  "3665686",
+  "3665700",
+  "3665706",
+  "3665707",
+  "3665713",
+  "3665720",
+  "3665745",
+  "3665751",
+  "3665864"
  ],
  "sympla_stale": true,
  "sympla_stale2": false
