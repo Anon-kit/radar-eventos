@@ -69,6 +69,7 @@
   "tag:google.com,2013:googlealerts/feed:12239015309450293638",
   "tag:google.com,2013:googlealerts/feed:12250262251249410725",
   "tag:google.com,2013:googlealerts/feed:1225531005065170029",
+  "tag:google.com,2013:googlealerts/feed:12273919925309757751",
   "tag:google.com,2013:googlealerts/feed:12304777624743206377",
   "tag:google.com,2013:googlealerts/feed:12360764699212003775",
   "tag:google.com,2013:googlealerts/feed:1239021218163068913",
@@ -414,6 +415,7 @@
   "tag:google.com,2013:googlealerts/feed:5637409778831738547",
   "tag:google.com,2013:googlealerts/feed:5687784527800135895",
   "tag:google.com,2013:googlealerts/feed:5695379466637370433",
+  "tag:google.com,2013:googlealerts/feed:5695717915329443619",
   "tag:google.com,2013:googlealerts/feed:5735463874885835102",
   "tag:google.com,2013:googlealerts/feed:5736171378027583413",
   "tag:google.com,2013:googlealerts/feed:5740142741408953967",
@@ -568,31 +570,31 @@
    "alerted": false,
    "bad_runs": 0,
    "last_count": 22,
-   "last_ok": "2026-11-24T13:50:03+00:00"
+   "last_ok": "2026-11-24T14:57:07+00:00"
   },
   "Nenety": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 5,
-   "last_ok": "2026-11-24T13:50:03+00:00"
+   "last_ok": "2026-11-24T14:57:08+00:00"
   },
   "Sympla": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 22584,
-   "last_ok": "2026-11-24T13:51:51+00:00"
+   "last_ok": "2026-11-24T14:59:10+00:00"
   },
   "Sympla (sitemap)": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 22584,
-   "last_ok": "2026-11-24T13:51:50+00:00"
+   "last_ok": "2026-11-24T14:59:08+00:00"
   },
   "Sympla lista": {
    "alerted": false,
    "bad_runs": 0,
-   "last_count": 687,
-   "last_ok": "2026-11-24T13:51:50+00:00"
+   "last_count": 713,
+   "last_ok": "2026-11-24T14:59:08+00:00"
   }
  },
  "last_heartbeat": "2026-11-22T22:30:25+00:00",
@@ -606,7 +608,7 @@
   "4163"
  ],
  "probe_sent": true,
- "sent_week": 14,
+ "sent_week": 25,
  "sympla_extra": {},
  "sympla_fail": {},
  "sympla_lastmod": "2026-11-18T04:04+00:00",
@@ -51902,11 +51904,28 @@
   "3664593",
   "3664613",
   "3664615",
+  "3664723",
   "3664734",
   "3664797",
   "3664890",
   "3664892",
-  "3664915"
+  "3664915",
+  "3664924",
+  "3664930",
+  "3664940",
+  "3664955",
+  "3664960",
+  "3664967",
+  "3664972",
+  "3664976",
+  "3664980",
+  "3664994",
+  "3665003",
+  "3665005",
+  "3665011",
+  "3665014",
+  "3665027",
+  "3665036"
  ],
  "sympla_stale": true,
  "sympla_stale2": false
