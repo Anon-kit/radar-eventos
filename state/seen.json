@@ -543,6 +543,7 @@
   "tag:google.com,2013:googlealerts/feed:7924919268566231783",
   "tag:google.com,2013:googlealerts/feed:7957956550092859371",
   "tag:google.com,2013:googlealerts/feed:7961539517800450443",
+  "tag:google.com,2013:googlealerts/feed:8013582497927136375",
   "tag:google.com,2013:googlealerts/feed:8057156062018167816",
   "tag:google.com,2013:googlealerts/feed:8096013854716767474",
   "tag:google.com,2013:googlealerts/feed:8134123419427231913",
@@ -635,31 +636,32 @@
    "alerted": false,
    "bad_runs": 0,
    "last_count": 22,
-   "last_ok": "2026-11-25T21:33:24+00:00"
+   "last_ok": "2026-11-25T22:39:09+00:00"
   },
   "Nenety": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 6,
-   "last_ok": "2026-11-25T21:33:25+00:00"
+   "last_ok": "2026-11-25T22:39:10+00:00"
   },
   "Sympla": {
    "alerted": false,
-   "bad_runs": 0,
+   "bad_runs": 1,
    "last_count": 31399,
+   "last_error": "RuntimeError: todas as páginas lidas parecem 'encerradas' (detecção suspeita)",
    "last_ok": "2026-11-25T21:36:01+00:00"
   },
   "Sympla (sitemap)": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 31399,
-   "last_ok": "2026-11-25T21:35:26+00:00"
+   "last_ok": "2026-11-25T22:40:18+00:00"
   },
   "Sympla lista": {
    "alerted": false,
    "bad_runs": 0,
-   "last_count": 740,
-   "last_ok": "2026-11-25T21:35:26+00:00"
+   "last_count": 739,
+   "last_ok": "2026-11-25T22:40:18+00:00"
   }
  },
  "last_heartbeat": "2026-11-22T22:30:25+00:00",
@@ -676,6 +678,7 @@
  "probe_sent": true,
  "sent_week": 43,
  "sympla_extra": {
+  "3650940": "https://www.sympla.com.br/evento/festival-sensacional-2027/3650940",
   "37992": "https://www.sympla.com.br/evento/sem-bigode/37992"
  },
  "sympla_fail": {},
