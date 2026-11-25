@@ -140,6 +140,7 @@
   "tag:google.com,2013:googlealerts/feed:14159284261035709850",
   "tag:google.com,2013:googlealerts/feed:14184291477556592051",
   "tag:google.com,2013:googlealerts/feed:14205343013564427850",
+  "tag:google.com,2013:googlealerts/feed:14222529245827557971",
   "tag:google.com,2013:googlealerts/feed:14229047749473916106",
   "tag:google.com,2013:googlealerts/feed:14272164924393823877",
   "tag:google.com,2013:googlealerts/feed:14319144707576075637",
@@ -371,6 +372,7 @@
   "tag:google.com,2013:googlealerts/feed:3461545014754892609",
   "tag:google.com,2013:googlealerts/feed:3540144787290555246",
   "tag:google.com,2013:googlealerts/feed:3569234670900830949",
+  "tag:google.com,2013:googlealerts/feed:3636669407240979333",
   "tag:google.com,2013:googlealerts/feed:3641136762744842963",
   "tag:google.com,2013:googlealerts/feed:365944479994656110",
   "tag:google.com,2013:googlealerts/feed:3662357976806078722",
@@ -629,31 +631,32 @@
    "alerted": false,
    "bad_runs": 0,
    "last_count": 22,
-   "last_ok": "2026-11-25T19:29:29+00:00"
+   "last_ok": "2026-11-25T20:28:28+00:00"
   },
   "Nenety": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 6,
-   "last_ok": "2026-11-25T19:29:29+00:00"
+   "last_ok": "2026-11-25T20:28:28+00:00"
   },
   "Sympla": {
    "alerted": false,
-   "bad_runs": 0,
+   "bad_runs": 1,
    "last_count": 31399,
+   "last_error": "RuntimeError: todas as páginas lidas parecem 'encerradas' (detecção suspeita)",
    "last_ok": "2026-11-25T19:31:49+00:00"
   },
   "Sympla (sitemap)": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 31399,
-   "last_ok": "2026-11-25T19:31:20+00:00"
+   "last_ok": "2026-11-25T20:29:37+00:00"
   },
   "Sympla lista": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 742,
-   "last_ok": "2026-11-25T19:31:20+00:00"
+   "last_ok": "2026-11-25T20:29:37+00:00"
   }
  },
  "last_heartbeat": "2026-11-22T22:30:25+00:00",
@@ -670,6 +673,8 @@
  "probe_sent": true,
  "sent_week": 42,
  "sympla_extra": {
+  "3643533": "https://www.sympla.com.br/evento/a-black-virou-festa/3643533",
+  "3665627": "https://www.sympla.com.br/evento/seminario-de-avaliacao-jemg-2026/3665627?mp_rloc=Esportes&mp_rtil=Todos+os+eventos",
   "37992": "https://www.sympla.com.br/evento/sem-bigode/37992"
  },
  "sympla_fail": {},
