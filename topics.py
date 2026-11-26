@@ -55,7 +55,8 @@ CHANNELS = {
                      "festival de comida", "feira de comida", "feira gastronomica", "festival gastronomico",
                      "comida de boteco"],
         "so_inicio": ["gastronomia", "gastronomico", "gastronomica", "culinaria"],
-        "so_titulo": ["burger", "hamburguer", "feijoada", "churrasco", "pizza"],
+        "so_titulo": ["burger", "hamburguer", "feijoada", "churrasco", "festival de pizza", "pizza fest"],
+        "excluir": ["aulao", "crossfit", "funcional", "treino", "pilates"],
     },
     "alta_gastronomia": {
         "id": "-1004320965396", "emoji": "🍷",
@@ -86,4 +87,4 @@ COMPANION = {"house": ["techno", "rave", "eletronica", "edm", "trance", "psytran
 
 # Grupos em que o evento vai para UM canal só: o de palavra mais forte; empate fraco = o primeiro
 # da lista; se bater com palavra forte nos dois, vai para os dois. Evita o mesmo aviso em dois canais.
-GRUPOS_EXCLUSIVOS = [("alta_gastronomia", "street_food")]
+GRUPOS_EXCLUSIVOS = [("alta_gastronomia", "street_food"), ("rll", "eletronica")]
