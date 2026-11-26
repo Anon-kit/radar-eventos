@@ -156,6 +156,7 @@
   "tag:google.com,2013:googlealerts/feed:14222529245827557971",
   "tag:google.com,2013:googlealerts/feed:14229047749473916106",
   "tag:google.com,2013:googlealerts/feed:14272164924393823877",
+  "tag:google.com,2013:googlealerts/feed:14280977659159755777",
   "tag:google.com,2013:googlealerts/feed:14319144707576075637",
   "tag:google.com,2013:googlealerts/feed:14323963569062207975",
   "tag:google.com,2013:googlealerts/feed:14332832931819654120",
@@ -667,31 +668,32 @@
    "alerted": false,
    "bad_runs": 0,
    "last_count": 21,
-   "last_ok": "2026-11-26T20:04:05+00:00"
+   "last_ok": "2026-11-26T21:08:22+00:00"
   },
   "Nenety": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 6,
-   "last_ok": "2026-11-26T20:04:06+00:00"
+   "last_ok": "2026-11-26T21:08:24+00:00"
   },
   "Sympla": {
    "alerted": false,
-   "bad_runs": 0,
+   "bad_runs": 1,
    "last_count": 31399,
+   "last_error": "RuntimeError: todas as páginas lidas parecem 'encerradas' (detecção suspeita)",
    "last_ok": "2026-11-26T20:06:14+00:00"
   },
   "Sympla (sitemap)": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 31399,
-   "last_ok": "2026-11-26T20:05:50+00:00"
+   "last_ok": "2026-11-26T21:09:40+00:00"
   },
   "Sympla lista": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 748,
-   "last_ok": "2026-11-26T20:05:50+00:00"
+   "last_ok": "2026-11-26T21:09:40+00:00"
   }
  },
  "last_heartbeat": "2026-11-22T22:30:25+00:00",
@@ -708,6 +710,7 @@
  "probe_sent": true,
  "sent_week": 51,
  "sympla_extra": {
+  "3655515": "https://www.sympla.com.br/aniversario-do-baila-4-anos---domingueira__3655515",
   "37992": "https://www.sympla.com.br/evento/sem-bigode/37992"
  },
  "sympla_fail": {},
