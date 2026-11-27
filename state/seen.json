@@ -32,6 +32,7 @@
   "tag:google.com,2013:googlealerts/feed:10970510255774571065",
   "tag:google.com,2013:googlealerts/feed:11013053437379087464",
   "tag:google.com,2013:googlealerts/feed:11049924180107365926",
+  "tag:google.com,2013:googlealerts/feed:11102024432213181293",
   "tag:google.com,2013:googlealerts/feed:11106486533561756385",
   "tag:google.com,2013:googlealerts/feed:11108689364338960646",
   "tag:google.com,2013:googlealerts/feed:11152631584228491095",
@@ -128,6 +129,7 @@
   "tag:google.com,2013:googlealerts/feed:13392258583192720569",
   "tag:google.com,2013:googlealerts/feed:13407316399572211447",
   "tag:google.com,2013:googlealerts/feed:13417047605667969259",
+  "tag:google.com,2013:googlealerts/feed:13480584342117199451",
   "tag:google.com,2013:googlealerts/feed:13513196477348158162",
   "tag:google.com,2013:googlealerts/feed:13546578493331706223",
   "tag:google.com,2013:googlealerts/feed:13546608492526200419",
@@ -307,6 +309,7 @@
   "tag:google.com,2013:googlealerts/feed:17998233610325794499",
   "tag:google.com,2013:googlealerts/feed:18018468222336791316",
   "tag:google.com,2013:googlealerts/feed:18060825709168630042",
+  "tag:google.com,2013:googlealerts/feed:18073831426908356665",
   "tag:google.com,2013:googlealerts/feed:18075206931387369797",
   "tag:google.com,2013:googlealerts/feed:18090995534148477417",
   "tag:google.com,2013:googlealerts/feed:18103805048983638230",
@@ -391,6 +394,7 @@
   "tag:google.com,2013:googlealerts/feed:3338906599716048913",
   "tag:google.com,2013:googlealerts/feed:3343977486704765838",
   "tag:google.com,2013:googlealerts/feed:3383101648513426968",
+  "tag:google.com,2013:googlealerts/feed:3427481040116428076",
   "tag:google.com,2013:googlealerts/feed:3437839455330300411",
   "tag:google.com,2013:googlealerts/feed:3442361912461904569",
   "tag:google.com,2013:googlealerts/feed:3461545014754892609",
@@ -447,6 +451,7 @@
   "tag:google.com,2013:googlealerts/feed:4572107293316883211",
   "tag:google.com,2013:googlealerts/feed:4589425072736061752",
   "tag:google.com,2013:googlealerts/feed:4650301439566788189",
+  "tag:google.com,2013:googlealerts/feed:4705264927164343744",
   "tag:google.com,2013:googlealerts/feed:474416657431977276",
   "tag:google.com,2013:googlealerts/feed:4788311451649875814",
   "tag:google.com,2013:googlealerts/feed:4813773035446691252",
@@ -465,8 +470,10 @@
   "tag:google.com,2013:googlealerts/feed:5113872787333865237",
   "tag:google.com,2013:googlealerts/feed:5132176092599286964",
   "tag:google.com,2013:googlealerts/feed:5133675999471122445",
+  "tag:google.com,2013:googlealerts/feed:5152240176741330631",
   "tag:google.com,2013:googlealerts/feed:5165770306850274377",
   "tag:google.com,2013:googlealerts/feed:5198768516598820571",
+  "tag:google.com,2013:googlealerts/feed:5210004865158536774",
   "tag:google.com,2013:googlealerts/feed:5222277771973429313",
   "tag:google.com,2013:googlealerts/feed:522502805913769841",
   "tag:google.com,2013:googlealerts/feed:5248136305550373095",
@@ -673,31 +680,32 @@
    "alerted": false,
    "bad_runs": 0,
    "last_count": 21,
-   "last_ok": "2026-11-27T00:26:35+00:00"
+   "last_ok": "2026-11-27T01:55:27+00:00"
   },
   "Nenety": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 6,
-   "last_ok": "2026-11-27T00:26:36+00:00"
+   "last_ok": "2026-11-27T01:55:28+00:00"
   },
   "Sympla": {
    "alerted": false,
-   "bad_runs": 0,
+   "bad_runs": 1,
    "last_count": 31399,
+   "last_error": "RuntimeError: todas as páginas lidas parecem 'encerradas' (detecção suspeita)",
    "last_ok": "2026-11-27T00:29:10+00:00"
   },
   "Sympla (sitemap)": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 31399,
-   "last_ok": "2026-11-27T00:28:30+00:00"
+   "last_ok": "2026-11-27T01:57:13+00:00"
   },
   "Sympla lista": {
    "alerted": false,
    "bad_runs": 0,
-   "last_count": 746,
-   "last_ok": "2026-11-27T00:28:29+00:00"
+   "last_count": 743,
+   "last_ok": "2026-11-27T01:57:13+00:00"
   }
  },
  "last_heartbeat": "2026-11-22T22:30:25+00:00",
@@ -714,6 +722,13 @@
  "probe_sent": true,
  "sent_week": 54,
  "sympla_extra": {
+  "3653215": "https://www.sympla.com.br/evento/sona/3653215?algoliaID=b25c94814a481495c4f5d64a79272708",
+  "3664610": "https://www.sympla.com.br/back-to-2000__3664610",
+  "3665617": "https://www.sympla.com.br/domingo--forro-da-joaquina--vem-dancar__3665617",
+  "3665728": "https://www.sympla.com.br/bruno-berg-e-gabriel-andrade-o-metaleiro-mineiro---stand-up-em-bh__3665728",
+  "3667021": "https://www.sympla.com.br/evento/conferencia-do-empreendedorismo/3667021",
+  "3667847": "https://www.sympla.com.br/evento/especial-de-natal-bolo-de-especiarias-com-doce-de-leite/3667847",
+  "3668290": "https://www.sympla.com.br/evento/2a-rua-do-queijo-mercado-de-origem/3668290?mp_rloc=Gr%C3%A1tis&mp_rtil=Eventos+gastron%C3%B4micos",
   "37992": "https://www.sympla.com.br/evento/sem-bigode/37992"
  },
  "sympla_fail": {},
