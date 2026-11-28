@@ -4,6 +4,7 @@
   "tag:google.com,2013:googlealerts/feed:10136001317634806341",
   "tag:google.com,2013:googlealerts/feed:10203797027728119100",
   "tag:google.com,2013:googlealerts/feed:10273023230680153804",
+  "tag:google.com,2013:googlealerts/feed:10287675707439526921",
   "tag:google.com,2013:googlealerts/feed:10301209880064838637",
   "tag:google.com,2013:googlealerts/feed:10320387813896205557",
   "tag:google.com,2013:googlealerts/feed:10326070757663895581",
@@ -332,6 +333,7 @@
   "tag:google.com,2013:googlealerts/feed:17998233610325794499",
   "tag:google.com,2013:googlealerts/feed:18012710983011108639",
   "tag:google.com,2013:googlealerts/feed:18018468222336791316",
+  "tag:google.com,2013:googlealerts/feed:18054648008728667330",
   "tag:google.com,2013:googlealerts/feed:18060825709168630042",
   "tag:google.com,2013:googlealerts/feed:18073831426908356665",
   "tag:google.com,2013:googlealerts/feed:18075206931387369797",
@@ -711,7 +713,7 @@
   "sympla_lista2": true
  },
  "channel_problems": {},
- "channels_checked": "2026-11-27T07:57:06+00:00",
+ "channels_checked": "2026-11-28T07:59:31+00:00",
  "channels_verified_once": true,
  "feed_init": [
   "409a21cd",
@@ -724,31 +726,32 @@
    "alerted": false,
    "bad_runs": 0,
    "last_count": 26,
-   "last_ok": "2026-11-28T06:33:43+00:00"
+   "last_ok": "2026-11-28T07:58:02+00:00"
   },
   "Nenety": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 6,
-   "last_ok": "2026-11-28T06:33:44+00:00"
+   "last_ok": "2026-11-28T07:58:02+00:00"
   },
   "Sympla": {
    "alerted": false,
-   "bad_runs": 0,
+   "bad_runs": 1,
    "last_count": 31399,
+   "last_error": "RuntimeError: todas as páginas lidas parecem 'encerradas' (detecção suspeita)",
    "last_ok": "2026-11-28T06:35:58+00:00"
   },
   "Sympla (sitemap)": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 31399,
-   "last_ok": "2026-11-28T06:35:34+00:00"
+   "last_ok": "2026-11-28T07:59:10+00:00"
   },
   "Sympla lista": {
    "alerted": false,
    "bad_runs": 0,
-   "last_count": 719,
-   "last_ok": "2026-11-28T06:35:34+00:00"
+   "last_count": 718,
+   "last_ok": "2026-11-28T07:59:09+00:00"
   }
  },
  "last_heartbeat": "2026-11-22T22:30:25+00:00",
@@ -766,6 +769,8 @@
  "sent_week": 73,
  "sympla_extra": {
   "140593": "https://www.sympla.com.br/evento/empregabilidade-estrategias-para-se-tornar-um-profissional-atrativo-no-mercado-de-trabalho/140593",
+  "3643426": "https://www.sympla.com.br/evento/lancamento-vinho-laco-ju-lins-e-silvia-mapa/3643426",
+  "3668896": "https://www.sympla.com.br/evento/laboratorio-pratico-2027-o-ano-da-virada-planeje-hoje-prepare-se-para-o-futuro/3668896",
   "37992": "https://www.sympla.com.br/evento/sem-bigode/37992"
  },
  "sympla_fail": {},
