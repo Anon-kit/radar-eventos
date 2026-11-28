@@ -52,6 +52,7 @@
   "tag:google.com,2013:googlealerts/feed:11458695829005847073",
   "tag:google.com,2013:googlealerts/feed:11484498886479482164",
   "tag:google.com,2013:googlealerts/feed:11527206049229120786",
+  "tag:google.com,2013:googlealerts/feed:11553197478731639389",
   "tag:google.com,2013:googlealerts/feed:11558648700661689448",
   "tag:google.com,2013:googlealerts/feed:11564434801080093063",
   "tag:google.com,2013:googlealerts/feed:11569367139058326452",
@@ -88,6 +89,7 @@
   "tag:google.com,2013:googlealerts/feed:1225531005065170029",
   "tag:google.com,2013:googlealerts/feed:12273919925309757751",
   "tag:google.com,2013:googlealerts/feed:12304777624743206377",
+  "tag:google.com,2013:googlealerts/feed:12343501827741109864",
   "tag:google.com,2013:googlealerts/feed:12348749013073920262",
   "tag:google.com,2013:googlealerts/feed:12360764699212003775",
   "tag:google.com,2013:googlealerts/feed:1239021218163068913",
@@ -131,6 +133,7 @@
   "tag:google.com,2013:googlealerts/feed:13262944408997506790",
   "tag:google.com,2013:googlealerts/feed:13269273085665841664",
   "tag:google.com,2013:googlealerts/feed:13274459783803465343",
+  "tag:google.com,2013:googlealerts/feed:13287094490096323643",
   "tag:google.com,2013:googlealerts/feed:13326702878450219355",
   "tag:google.com,2013:googlealerts/feed:13328034735690747144",
   "tag:google.com,2013:googlealerts/feed:13392258583192720569",
@@ -296,6 +299,7 @@
   "tag:google.com,2013:googlealerts/feed:17286110274653177198",
   "tag:google.com,2013:googlealerts/feed:172932571508914649",
   "tag:google.com,2013:googlealerts/feed:17324954324907900872",
+  "tag:google.com,2013:googlealerts/feed:1734115118700309624",
   "tag:google.com,2013:googlealerts/feed:17353992031136470889",
   "tag:google.com,2013:googlealerts/feed:17356795613856258556",
   "tag:google.com,2013:googlealerts/feed:17404657417155135307",
@@ -414,6 +418,7 @@
   "tag:google.com,2013:googlealerts/feed:3337590070747347295",
   "tag:google.com,2013:googlealerts/feed:3338906599716048913",
   "tag:google.com,2013:googlealerts/feed:3343977486704765838",
+  "tag:google.com,2013:googlealerts/feed:3381165127427935435",
   "tag:google.com,2013:googlealerts/feed:3383101648513426968",
   "tag:google.com,2013:googlealerts/feed:3427481040116428076",
   "tag:google.com,2013:googlealerts/feed:3437839455330300411",
@@ -657,6 +662,7 @@
   "tag:google.com,2013:googlealerts/feed:90746544723527446",
   "tag:google.com,2013:googlealerts/feed:9092269376907334241",
   "tag:google.com,2013:googlealerts/feed:9136913467541412902",
+  "tag:google.com,2013:googlealerts/feed:9144149633007324819",
   "tag:google.com,2013:googlealerts/feed:9216749980130568846",
   "tag:google.com,2013:googlealerts/feed:9222350685924203615",
   "tag:google.com,2013:googlealerts/feed:9224662467989297095",
@@ -688,6 +694,7 @@
   "tag:google.com,2013:googlealerts/feed:9849587279689839333",
   "tag:google.com,2013:googlealerts/feed:9883155813426070978",
   "tag:google.com,2013:googlealerts/feed:9902292065231919872",
+  "tag:google.com,2013:googlealerts/feed:9956538812830536835",
   "tag:google.com,2013:googlealerts/feed:995728767867516214",
   "tag:google.com,2013:googlealerts/feed:9976906039112828585",
   "tag:google.com,2013:googlealerts/feed:9992343970963043559"
@@ -712,31 +719,32 @@
    "alerted": false,
    "bad_runs": 0,
    "last_count": 26,
-   "last_ok": "2026-11-28T04:15:28+00:00"
+   "last_ok": "2026-11-28T05:29:36+00:00"
   },
   "Nenety": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 6,
-   "last_ok": "2026-11-28T04:15:29+00:00"
+   "last_ok": "2026-11-28T05:29:38+00:00"
   },
   "Sympla": {
    "alerted": false,
-   "bad_runs": 0,
+   "bad_runs": 1,
    "last_count": 31399,
+   "last_error": "RuntimeError: todas as páginas lidas parecem 'encerradas' (detecção suspeita)",
    "last_ok": "2026-11-28T04:17:57+00:00"
   },
   "Sympla (sitemap)": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 31399,
-   "last_ok": "2026-11-28T04:17:25+00:00"
+   "last_ok": "2026-11-28T05:31:36+00:00"
   },
   "Sympla lista": {
    "alerted": false,
    "bad_runs": 0,
-   "last_count": 733,
-   "last_ok": "2026-11-28T04:17:24+00:00"
+   "last_count": 724,
+   "last_ok": "2026-11-28T05:31:35+00:00"
   }
  },
  "last_heartbeat": "2026-11-22T22:30:25+00:00",
@@ -754,6 +762,13 @@
  "sent_week": 72,
  "sympla_extra": {
   "140593": "https://www.sympla.com.br/evento/empregabilidade-estrategias-para-se-tornar-um-profissional-atrativo-no-mercado-de-trabalho/140593",
+  "3667363": "https://www.sympla.com.br/evento/domingao-do-boteco-do-hudson-29-de-novembro/3667363",
+  "3668659": "https://www.sympla.com.br/evento/ii-congresso-da-advocacia-criminal-de-lagoa-santa/3668659?mp_rloc=Vem+por+a%C3%AD&mp_rtil=Congressos+e+palestras+previstos+para+2021",
+  "3669151": "https://www.sympla.com.br/evento/batavo-mackenzie-x-brasilia-volei-04-12-superliga-feminina/3669151",
+  "3669223": "https://www.sympla.com.br/evento/conexao-empresarial-luis-eduardo-falcao-vice-governador-eleito-2026/3669223",
+  "3669244": "https://www.sympla.com.br/evento/05-12-sabado-na-hope-bon-jovi-bh-marejah/3669244",
+  "3669288": "https://www.sympla.com.br/evento/domingo-no-selettus/3669288",
+  "3669380": "https://www.sympla.com.br/evento/5-cafe-condominial/3669380",
   "37992": "https://www.sympla.com.br/evento/sem-bigode/37992"
  },
  "sympla_fail": {},
