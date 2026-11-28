@@ -96,6 +96,7 @@
   "tag:google.com,2013:googlealerts/feed:12360764699212003775",
   "tag:google.com,2013:googlealerts/feed:1239021218163068913",
   "tag:google.com,2013:googlealerts/feed:12394191398964204676",
+  "tag:google.com,2013:googlealerts/feed:1239674366942449161",
   "tag:google.com,2013:googlealerts/feed:1242234141333109107",
   "tag:google.com,2013:googlealerts/feed:1246149264137842109",
   "tag:google.com,2013:googlealerts/feed:12464918004186647485",
@@ -281,6 +282,7 @@
   "tag:google.com,2013:googlealerts/feed:16719084016423645466",
   "tag:google.com,2013:googlealerts/feed:16741589822203638520",
   "tag:google.com,2013:googlealerts/feed:16798168572986838378",
+  "tag:google.com,2013:googlealerts/feed:16812343880089679305",
   "tag:google.com,2013:googlealerts/feed:1682069797609987590",
   "tag:google.com,2013:googlealerts/feed:16828336801669169362",
   "tag:google.com,2013:googlealerts/feed:16842320868054636312",
@@ -312,6 +314,7 @@
   "tag:google.com,2013:googlealerts/feed:17420603098292078095",
   "tag:google.com,2013:googlealerts/feed:17463937054189496119",
   "tag:google.com,2013:googlealerts/feed:17467039656040783622",
+  "tag:google.com,2013:googlealerts/feed:17493708792076025881",
   "tag:google.com,2013:googlealerts/feed:17540542814622483894",
   "tag:google.com,2013:googlealerts/feed:17545901875208375912",
   "tag:google.com,2013:googlealerts/feed:17547622481173503158",
@@ -520,6 +523,7 @@
   "tag:google.com,2013:googlealerts/feed:5396091107810817300",
   "tag:google.com,2013:googlealerts/feed:539835406460881276",
   "tag:google.com,2013:googlealerts/feed:541797955280367744",
+  "tag:google.com,2013:googlealerts/feed:5446394425869187405",
   "tag:google.com,2013:googlealerts/feed:5467978487828995192",
   "tag:google.com,2013:googlealerts/feed:5520255094495489489",
   "tag:google.com,2013:googlealerts/feed:553445760848593468",
@@ -555,6 +559,7 @@
   "tag:google.com,2013:googlealerts/feed:5976745084190840390",
   "tag:google.com,2013:googlealerts/feed:6097498185673952696",
   "tag:google.com,2013:googlealerts/feed:609986245338222425",
+  "tag:google.com,2013:googlealerts/feed:6129119508400379647",
   "tag:google.com,2013:googlealerts/feed:6163149490058274093",
   "tag:google.com,2013:googlealerts/feed:6168897987401470409",
   "tag:google.com,2013:googlealerts/feed:6191253489538025250",
@@ -726,17 +731,17 @@
    "alerted": false,
    "bad_runs": 0,
    "last_count": 24,
-   "last_ok": "2026-11-28T11:47:08+00:00"
+   "last_ok": "2026-11-28T12:56:12+00:00"
   },
   "Nenety": {
    "alerted": false,
    "bad_runs": 0,
    "last_count": 6,
-   "last_ok": "2026-11-28T11:47:08+00:00"
+   "last_ok": "2026-11-28T12:56:13+00:00"
   },
   "Sympla": {
    "alerted": true,
-   "bad_runs": 5,
+   "bad_runs": 6,
    "last_count": 31399,
    "last_error": "RuntimeError: todas as páginas lidas parecem 'encerradas' (detecção suspeita)",
    "last_ok": "2026-11-28T06:35:58+00:00"
@@ -745,13 +750,13 @@
    "alerted": false,
    "bad_runs": 0,
    "last_count": 31399,
-   "last_ok": "2026-11-28T11:48:17+00:00"
+   "last_ok": "2026-11-28T12:57:40+00:00"
   },
   "Sympla lista": {
    "alerted": false,
    "bad_runs": 0,
-   "last_count": 591,
-   "last_ok": "2026-11-28T11:48:17+00:00"
+   "last_count": 588,
+   "last_ok": "2026-11-28T12:57:40+00:00"
   }
  },
  "last_heartbeat": "2026-11-22T22:30:25+00:00",
@@ -770,7 +775,12 @@
  "sympla_extra": {
   "140593": "https://www.sympla.com.br/evento/empregabilidade-estrategias-para-se-tornar-um-profissional-atrativo-no-mercado-de-trabalho/140593",
   "3643426": "https://www.sympla.com.br/evento/lancamento-vinho-laco-ju-lins-e-silvia-mapa/3643426",
+  "3652931": "https://www.sympla.com.br/evento/encontro-do-casal-gravido/3652931?algoliaID=391c14924f5de112e218f9a31b843a65&mp_rloc=Eventos+amanh%C3%A3&mp_rtil=O+que+fazer",
   "3668896": "https://www.sympla.com.br/evento/laboratorio-pratico-2027-o-ano-da-virada-planeje-hoje-prepare-se-para-o-futuro/3668896",
+  "3669289": "https://www.sympla.com.br/evento/22h-sabado-no-the-mexican-festa-anos-2000-summer-eletrohits-the-mexican-c-djs-rodada-dupla/3669289",
+  "3669300": "https://www.sympla.com.br/evento/quarta-jack-harde-classic-rock-velotrol-classic-rock/3669300",
+  "3669306": "https://www.sympla.com.br/evento/sexta-jack-ca-h-hits-do-rock-hh-classic-rock/3669306",
+  "3669311": "https://www.sympla.com.br/evento/domingo-jack-putz-grilla-rockfield-hits-do-rock-adrianna-rock-sessions/3669311",
   "37992": "https://www.sympla.com.br/evento/sem-bigode/37992"
  },
  "sympla_fail": {},
